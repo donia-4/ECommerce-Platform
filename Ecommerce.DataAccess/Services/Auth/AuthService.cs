@@ -126,8 +126,6 @@ namespace Ecommerce.DataAccess.Services.Auth
                 await _userManager.AddToRoleAsync(user, "USER");
                 _logger.LogInformation("User created and role 'User' assigned. ID: {UserId}", user.Id);
 
-                await _userManager.CreateAsync(user);
-
                 var tokens = await _tokenStoreService.GenerateAndStoreTokensAsync(user.Id, user);
 
                 var otp = await _otpService.GenerateAndStoreOtpAsync(user.Id);
