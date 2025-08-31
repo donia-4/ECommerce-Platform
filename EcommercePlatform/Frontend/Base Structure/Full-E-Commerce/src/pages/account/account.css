@@ -1,0 +1,184 @@
+:root {
+  /*====================Colors & Hover colors====================*/
+
+  --red-color: #db4444;
+  --red-hover: #c13a3a; /* Darker red */
+
+  --grey-color: #f5f5f5;
+  --grey-hover: #e8e8e8; /* Slightly darker grey */
+
+  --sec-grey-color: #2f2e30;
+  --sec-grey-hover: #242325; /* Darker grey */
+
+  --yellow-color: #ffad33;
+  --yellow-hover: #ff9a00; /* Darker yellow */
+
+  --black-color: #000000;
+  --black-hover: rgba(0, 0, 0, 0.8); /* 80% opacity */
+
+  --white-color: #fafafa;
+  --white-hover: rgba(250, 250, 250, 0.8); /* 80% opacity */
+
+  --green-color: #00ff66;
+  --green-hover: #00cc52; /* Darker green */
+
+  /*====================Hover Transition==================== */
+  --hover-transition: 0.2s ease-out;
+
+  /*====================Common Text opacity====================*/
+  --text-opacity: 0.5;
+
+  /* ====================Border color (Ex:input border)==================== */
+  --border: 1px solid rgba(0, 0, 0, 0.5);
+
+  /* ====================Box Shadow (Cart items)==================== */
+  --box-shadow: 0px 1px 13px 0px rgba(0, 0, 0, 0.05);
+
+  /* ====================Font Families==================== */
+
+  /* popines*/
+  --poppines-regular: "Poppins-Regular";
+  --poppines-semi-bold: "Poppins-SemiBold";
+  --poppines-bold: "Poppins-Bold";
+
+  /* Inter */
+  --Inter-regular: "Inter_18pt-Regular";
+  --Inter-semi-bold: "Inter_18pt-SemiBold";
+  --Inter-bold: "Inter_18pt-Bold";
+
+  /* ====================Font sizes====================*/
+  --header-size: 36px;
+  --text-size: 16px;
+  --sec-text-size: 20px;
+  --input-txt-size: 12px;
+}
+
+.account-container {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 20px;
+  padding: 20px;
+  width: 90%;
+  margin: auto;
+}
+
+.account-sidebar h3 {
+  font-size: var(--sec-text-size);
+  margin: 15px 0 8px;
+  font-family: var(--poppines-semi-bold);
+}
+
+.account-sidebar ul {
+  list-style: none;
+  padding: 0 20px;
+  font-family: var(--poppines-regular);
+}
+
+.account-sidebar li {
+  margin: 5px 0;
+}
+
+.account-sidebar a.active {
+  color: var(--red-color) !important;
+}
+.account-sidebar li a {
+  color: var(--black-color);
+  opacity: var(--text-opacity);
+  transform: var(--hover-transition);
+}
+.account-sidebar li a:hover {
+  color: var(--red-hover);
+  opacity: 1;
+}
+.account-content {
+  padding: 20px 80px;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+}
+.account-content h2 {
+  color: var(--red-color);
+  font-size: var(--sec-text-size);
+  font-family: var(--poppines-semi-bold);
+}
+.profile-form {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-grid div {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: var(--text-size);
+  font-family: var(--poppines-regular);
+  margin-bottom: 5px;
+  color: var(--black-color);
+}
+
+input {
+  padding: 15px;
+  border-radius: 4px;
+  font-size: var(--input-txt-size);
+  font-family: var(--poppines-regular);
+  background-color: var(--grey-color);
+  border: none;
+  transform: var(--hover-transition);
+}
+input:hover {
+  background-color: var(--grey-hover);
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.btn-cancel {
+  background: transparent;
+  border: none;
+  color: var(--black-color);
+  font-size: var(--text-size);
+  cursor: pointer;
+}
+
+.btn-save {
+  background: var(--red-color);
+  color: var(--white-color);
+  padding: 15px 50px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: var(--text-size);
+  font-family: var(--poppines-regular);
+  transform: var(--hover-transition);
+}
+.btn-save:hover{
+    background: var(--red-hover);
+}
+.error {
+  color: var(--red-color);
+  font-size: var(--input-txt-size);
+  font-family: var(--poppines-regular);
+  margin-top: 5px;
+}
+.success-message {
+  color: green;
+  background: #e8f9e8;
+  border: 1px solid #b6e2b6;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-family: var(--poppines-regular);
+  font-size: var(--text-size);
+}
