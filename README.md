@@ -48,8 +48,9 @@ The system covers all essential e-commerce operations with a secure and scalable
 
 ---
 
-## 🛠 Tech Stack
-- **Backend**: ASP.NET Core Web API  
+## Tech Stack
+- **Backend**: ASP.NET Core Web API
+- **FrontEnd**: React framework
 - **Authentication**: ASP.NET Identity + JWT  
 - **Payment Gateways**: Mada, Apple Pay, PayPal, COD  
 - **Deployment**: MonsterAPi + Vercel
@@ -59,7 +60,7 @@ The system covers all essential e-commerce operations with a secure and scalable
 ## Git Branching Methodology
 
 ### Main Branches
-- **production** → Stable branch (live).  
+- **master** → Stable branch (live).  
 - **dev** → Active development branch.  
 
 ### Specialized Branches
@@ -85,5 +86,5 @@ Modules for subfolders:
 ##  Workflow
 - Work branches → from `dev`.  
 - Merge back into `dev` after review.  
-- Hotfixes → from `production`, then merged into both `production` and `dev`.  
+- Hotfixes → from `master`, then merged into both `master` and `dev`.  
 
