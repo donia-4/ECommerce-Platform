@@ -25,14 +25,14 @@ namespace Ecommerce.DataAccess.Services.Auth
     public class AuthService : IAuthService
     {
         private readonly UserManager<User> _userManager;
-        private readonly AuthContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly IEmailService _emailService;
         private readonly IOTPService _otpService;
         private readonly ResponseHandler _responseHandler;
         private readonly ITokenStoreService _tokenStoreService;
         private readonly ILogger<AuthService> _logger;
 
-        public AuthService(UserManager<User> userManager, AuthContext context, IEmailService emailService, IOTPService otpService, ResponseHandler responseHandler, ITokenStoreService tokenStoreService, ILogger<AuthService> logger)
+        public AuthService(UserManager<User> userManager, ApplicationDbContext context, IEmailService emailService, IOTPService otpService, ResponseHandler responseHandler, ITokenStoreService tokenStoreService, ILogger<AuthService> logger)
         {
             _userManager = userManager;
             _context = context;

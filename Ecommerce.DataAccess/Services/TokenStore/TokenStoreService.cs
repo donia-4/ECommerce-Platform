@@ -20,9 +20,9 @@ namespace Ecommerce.DataAccess.Services.Token
         private readonly SymmetricSecurityKey _symmetricSecurityKey;
         private readonly UserManager<User> _userManager; // To get user roles 
         private readonly JwtSettings _jwtSettings;
-        private readonly AuthContext _authContext;
+        private readonly ApplicationDbContext _ApplicationDbContext;
 
-        public TokenStoreService(IOptions<JwtSettings> jwtOptions, UserManager<User> userManager, AuthContext authContext)
+        public TokenStoreService(IOptions<JwtSettings> jwtOptions, UserManager<User> userManager, ApplicationDbContext ApplicationDbContext)
         {
             _jwtSettings = jwtOptions.Value ?? throw new ArgumentNullException(nameof(jwtOptions));
             _userManager = userManager;
@@ -31,7 +31,7 @@ namespace Ecommerce.DataAccess.Services.Token
                 throw new ArgumentException("JWT SigningKey is not configured.");
             }
             _symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SigningKey));
-            _authContext = authContext;
+            _ApplicationDbContext = ApplicationDbContext;
         }
         public async Task<string> CreateAccessTokenAsync(User appUser)
         {
@@ -70,7 +70,7 @@ namespace Ecommerce.DataAccess.Services.Token
         }
         public async Task SaveRefreshTokenAsync(string userId, string refreshToken)
         {
-            await _authContext.UserRefreshTokens.AddAsync(new UserRefreshToken
+            await _ApplicationDbContext.UserRefreshTokens.AddAsync(new UserRefreshToken
             {
                 UserId = userId,
                 Token = refreshToken,
@@ -78,20 +78,20 @@ namespace Ecommerce.DataAccess.Services.Token
                 IsUsed = false
             });
 
-            await _authContext.SaveChangesAsync();
+            await _ApplicationDbContext.SaveChangesAsync();
         }
         public async Task InvalidateOldTokensAsync(string userId)
         {
-            var tokens = await _authContext.UserRefreshTokens
+            var tokens = await _ApplicationDbContext.UserRefreshTokens
                 .Where(r => r.UserId == userId)
                 .ToListAsync();
 
-            _authContext.UserRefreshTokens.RemoveRange(tokens);
-            await _authContext.SaveChangesAsync();
+            _ApplicationDbContext.UserRefreshTokens.RemoveRange(tokens);
+            await _ApplicationDbContext.SaveChangesAsync();
         }
         public async Task<bool> IsValidAsync(string refreshToken)
         {
-            return await _authContext.UserRefreshTokens
+            return await _ApplicationDbContext.UserRefreshTokens
                 .AnyAsync(r => r.Token == refreshToken && !r.IsUsed && r.ExpiryDateUtc > DateTime.UtcNow);
         }
         

@@ -47,7 +47,7 @@ namespace EcommercePlatform
             builder.Services.AddResendOtpRateLimiter();
 
             builder.Services.AddDataProtection()
-                .PersistKeysToDbContext<AuthContext>()
+                .PersistKeysToDbContext<ApplicationDbContext>()
                 .SetApplicationName("AuthStarter");
 
             // For redis 
