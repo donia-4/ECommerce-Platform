@@ -182,3 +182,29 @@ input:hover {
   font-family: var(--poppines-regular);
   font-size: var(--text-size);
 }
+@media (max-width: 768px) {
+  .account-container {
+    grid-template-columns: 1fr;
+  }
+
+  .account-sidebar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .account-content{
+        padding: 20px 15px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column; 
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
+}

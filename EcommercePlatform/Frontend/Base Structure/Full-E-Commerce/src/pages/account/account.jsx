@@ -14,7 +14,7 @@ export default function Account() {
 
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
-  const [successMessage, setSuccessMessage] = useState(""); 
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -94,7 +94,7 @@ export default function Account() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
-    setSuccessMessage(""); 
+    setSuccessMessage("");
 
     const validationErrors = runValidation(form);
     setErrors(validationErrors);
@@ -128,45 +128,45 @@ export default function Account() {
     });
     setErrors({});
     setSubmitted(false);
-    setSuccessMessage("");  
+    setSuccessMessage("");
   };
 
   return (
     <div className="account-container">
       <aside className="account-sidebar">
-        <h3>Manage My Account</h3>
-        <ul>
-          <li>
-            <a className="active" href="#">
-              My Profile
-            </a>
-          </li>
-          <li>
-            <a href="#">Address Book</a>
-          </li>
-          <li>
-            <a href="#">My Payment Options</a>
-          </li>
-        </ul>
+        <div>
+          <h3>Manage My Account</h3>
+          <ul>
+            <li>
+              <a className="active" href="#">
+                My Profile
+              </a>
+            </li>
+            <li>
+              <a href="#">Address Book</a>
+            </li>
+            <li>
+              <a href="#">My Payment Options</a>
+            </li>
+          </ul>
 
-        <h3>My Orders</h3>
-        <ul>
-          <li>
-            <a href="#">My Returns</a>
-          </li>
-          <li>
-            <a href="#">My Cancellations</a>
-          </li>
-        </ul>
+          <h3>My Orders</h3>
+          <ul>
+            <li>
+              <a href="#">My Returns</a>
+            </li>
+            <li>
+              <a href="#">My Cancellations</a>
+            </li>
+          </ul>
 
-        <h3>My Wishlist</h3>
+          <h3>My Wishlist</h3>
+        </div>
       </aside>
 
-     
       <main className="account-content">
         <h2>Edit Your Profile</h2>
 
-        
         {successMessage && <p className="success-message">{successMessage}</p>}
 
         <form className="profile-form" onSubmit={handleSubmit}>
