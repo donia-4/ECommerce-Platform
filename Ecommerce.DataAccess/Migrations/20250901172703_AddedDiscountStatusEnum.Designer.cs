@@ -4,6 +4,7 @@ using Ecommerce.DataAccess.ApplicationContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecommerce.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class AuthContextModelSnapshot : ModelSnapshot
+    [Migration("20250901172703_AddedDiscountStatusEnum")]
+    partial class AddedDiscountStatusEnum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,7 +47,7 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Buyers", (string)null);
+                    b.ToTable("Buyers");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.Auth.Identity.Role", b =>
@@ -162,7 +165,7 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserRefreshTokens", (string)null);
+                    b.ToTable("UserRefreshTokens");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.Cart", b =>
@@ -187,7 +190,7 @@ namespace Ecommerce.DataAccess.Migrations
                     b.HasIndex("BuyerId")
                         .IsUnique();
 
-                    b.ToTable("Carts", (string)null);
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.CartItem", b =>
@@ -214,7 +217,7 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("CartItems", (string)null);
+                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.Category", b =>
@@ -240,7 +243,7 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.Discount", b =>
@@ -280,7 +283,7 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Discounts", (string)null);
+                    b.ToTable("Discounts");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.DiscountCategory", b =>
@@ -301,7 +304,7 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.HasIndex("DiscountId");
 
-                    b.ToTable("DiscountCategories", (string)null);
+                    b.ToTable("DiscountCategories");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.DiscountProduct", b =>
@@ -322,7 +325,7 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("DiscountProducts", (string)null);
+                    b.ToTable("DiscountProducts");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.Order", b =>
@@ -371,7 +374,7 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.HasIndex("BuyerId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.OrderItem", b =>
@@ -407,7 +410,7 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.PaymentMethod", b =>
@@ -433,7 +436,7 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentMethods", (string)null);
+                    b.ToTable("PaymentMethods");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.PaymentTransaction", b =>
@@ -474,7 +477,7 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.HasIndex("PaymentMethodId");
 
-                    b.ToTable("PaymentTransactions", (string)null);
+                    b.ToTable("PaymentTransactions");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.Product", b =>
@@ -508,7 +511,7 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.ProductImage", b =>
@@ -532,7 +535,7 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductImages", (string)null);
+                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.SavedPaymentMethod", b =>
@@ -562,7 +565,7 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.HasIndex("PaymentMethodId");
 
-                    b.ToTable("SavedPaymentMethods", (string)null);
+                    b.ToTable("SavedPaymentMethods");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.Wishlist", b =>
@@ -587,7 +590,7 @@ namespace Ecommerce.DataAccess.Migrations
                     b.HasIndex("BuyerId")
                         .IsUnique();
 
-                    b.ToTable("Wishlists", (string)null);
+                    b.ToTable("Wishlists");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.WishlistItem", b =>
@@ -614,7 +617,7 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.HasIndex("WishlistId");
 
-                    b.ToTable("WishlistItems", (string)null);
+                    b.ToTable("WishlistItems");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.DataProtection.EntityFrameworkCore.DataProtectionKey", b =>
@@ -633,7 +636,7 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DataProtectionKeys", (string)null);
+                    b.ToTable("DataProtectionKeys");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
