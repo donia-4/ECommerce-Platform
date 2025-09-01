@@ -1,0 +1,171 @@
+@use "../../../../assets/common_scss/commonScss.scss" as *;
+.HomePart1
+{
+    @include start-end;
+    width: 100%;
+            height:340px;
+            gap: 25px;
+ .left
+ {
+    height: 100%;
+    @include end;
+    border-right: var(--sec-border);
+    width: 18%;
+
+    ul
+    {
+        margin: 0px ;
+        list-style: none;
+        color: var(--black-color);
+        @include Col-end-start;
+        font-size: var(--text-size);
+        *{
+            width: 180px;
+            &:not(li:last-child)
+            {
+
+                margin-bottom: 17px;
+            }
+         
+        }
+    }
+ }   
+}
+
+
+.HomePart1
+{
+    .right
+    {
+        width:75%;
+        height: 320px;
+
+        .swiper
+        {
+height: 100% !important;
+        }
+       
+
+        .container{
+height: 100% !important;
+padding: 0px 70px 0px 100px ;
+
+            color: var(--white-color);
+            background-color: var(--black-color);
+            @include between-center;
+            overflow: hidden;
+            .text
+            {
+                    width: 35%;
+                    text-transform: capitalize;
+                    font-size: var(--text-size);
+letter-spacing: 1.1px;
+>*
+{
+    margin-bottom:23px;
+}
+
+div{
+
+
+    &:first-child
+    {
+        @include Start-center;
+        gap: 8px;
+        text-transform:none;
+
+        p
+        {
+            margin: 0px;
+        }
+        .logo
+        {
+            background-color: rgb(255, 255, 255,0.4);
+            border-radius: 50%;
+            padding: 5px;
+            width: 50px;
+            height:50px;
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+
+    }
+   
+   
+}    
+
+        h1
+        {
+
+            font-family: var(--Inter-semi-bold);
+                                letter-spacing: 2px;
+                                font-size: var(--header-size);
+
+        }
+
+        .ShopNow
+        {
+                            font-size: var(--text-size);
+                            @include Start-center;
+p{
+    border-bottom:1px solid var(--white-color) ;
+    width: fit-content;
+    margin: 0px;
+    padding:2px 0px;
+}
+            a{
+
+                font-size: var(--text-size);
+                color: var(--white-color);
+                width: fit-content;
+                text-decoration: none;
+            }
+            span
+            {
+                @include Centering;
+              margin-left: 8px;
+            }
+        }
+
+            }
+            .image
+            {
+                width:50%;
+                height: 100%;
+                @include end-center;
+                img
+                {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+
+            }
+        }
+
+    }
+
+}
+
+
+.HomePart1
+{
+.swiper-pagination-bullet    {
+        background: var(--white-color) !important;
+         opacity: var(--text-opacity) !important;
+         width: 10px;
+         height: 10px;
+
+     }
+    
+.swiper-pagination-bullet-active   
+ {
+
+background:var(--red-color) !important ;
+opacity: 1 !important;
+border: 1.5px solid var(--white-color);
+    }
+}

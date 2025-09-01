@@ -1,0 +1,44 @@
+.HomeHeader
+{
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 10px 0;
+            font-size: var(--text-size);
+            
+
+        .title-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .title-text h2 {
+            margin:0 ;
+            font-size: var(--header-size);
+            color:var(--black-color);
+            font-family: var(--Inter-semi-bold);
+        }
+
+        .title-text p {
+            margin: 0;
+            font-size: 0.9em;
+            color: var(--red-color);
+            font-weight: bold;
+            position: relative;
+            padding: 20px;
+        }
+
+        .title-icon {
+            position:absolute;
+            width: 12px;
+            height: 30px;
+            background-color: var(--red-color);
+            margin-right: 10px;
+            left: 0px;
+            bottom: 50%;
+            transform: translateY(50%);
+            border-radius: 2px;
+        }
+
+
+}

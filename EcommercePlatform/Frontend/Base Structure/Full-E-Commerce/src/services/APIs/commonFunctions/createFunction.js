@@ -10,6 +10,7 @@ export default async function CreateAPi_Function (initialUrl,intialData){
         body:JSON.stringify(intialData),
         headers:{"Content-Type":"application/json"} 
     })
+    
 
 // Http  level error (status code) 
     if(!res.ok) {
@@ -17,8 +18,12 @@ export default async function CreateAPi_Function (initialUrl,intialData){
     } 
 
 
-return await res.json();
-       }
+const contentType = res.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            return await res.json();
+        } else {
+            return await res.text();
+        }       }
         catch(error)
         {
  throw new Error (error.message);

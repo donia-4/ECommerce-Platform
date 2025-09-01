@@ -1,4 +1,155 @@
+@use "../../../assets/common_scss/commonScss.scss" as *;
+
 nav
 {
+
+    color: var(--white-color);
+    .top
+    {
+        background-color: var(--black-color);
+        font-size: 12px;
+        height: 40px;
+font-weight: 400;
+@include Centering;
+position: relative;
+
+p
+{
+        @include Centering;
+        gap: 10px;
+margin: 0px;
+    &:last-child
+    {
+        position: absolute;
+        right: 150px;
+        gap: 5px;
+        span{
+                    @include Centering;
+
+        }
+
+    }
+}
+
+        a
+{
+
+font-family: var(--poppines-semi-bold);
+    color: white;
+}
+    }
     
+}
+
+
+nav
+{
+    .bottom
+    {
+        border-bottom: var(--sec-border);
+        color: var(--black-color);
+@include between-center;
+padding: 25px 70px 2px 52px;
+
+      > div
+        {
+            width: 420px;
+            overflow: hidden;
+
+&:first-child
+{
+    width: 370px;
+    p {
+
+        font-family: var(--Inter-bold);
+        font-size: 20px;
+    }
+}
+
+a
+{
+    text-decoration: none;
+    color: var(--black-color);
+    font-size: var(--text-size);
+    transition: var(--transition);
+    &:hover 
+    {
+        color: var( --black-hover);
+
+    }
+}
+
+&:nth-of-type(2)
+{
+    @include between-center;
+a
+{
+   
+&.active
+{
+    border-bottom: var(--border);
+}
+}
+
+}
+
+
+
+&:nth-of-type(3)
+{
+    @include end-center;
+    gap: 20px;
+
+    .search {
+            position: relative;
+
+   
+input
+{
+border: none;
+padding: 10px 15px;
+    border-radius: 2px;
+    background-color: var(--grey-color);
+    width: 200px;
+    height: 30px;
+    outline: none;
+
+    &::placeholder
+    {
+        font-size: var(--input-txt-size);
+    }
+}    
+span
+{
+    position: absolute;
+    right: 10px;
+    top:50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: var(--black-color);
+    @include Centering;
+
+}
+
+ }
+
+ .links 
+ {
+     @include Centering;
+     gap: 17px;
+    a{
+font-size:18px;
+@include Centering;
+    }
+ }
+}
+
+
+
+
+
+
+
+        }
+    }
 }

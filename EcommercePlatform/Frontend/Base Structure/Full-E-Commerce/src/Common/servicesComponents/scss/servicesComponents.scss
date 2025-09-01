@@ -1,0 +1,56 @@
+@use "../../../assets/common_scss/commonScss.scss" as *;
+
+.ServicesComponents
+{
+    @include Centering;
+                gap: 100px;
+
+        .card {
+          
+            @include Col-Centering;
+            padding: 2rem;
+            border: none;
+        }
+
+        .icon-container {
+            width: 60px;
+            height: 60px;
+            background-color: #e0e0e0;
+            border-radius: 50%;
+         
+            @include Centering;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Inline SVG icon styling */
+        .icon-container span         
+        {
+   background-color: var(--black-color);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            @include Centering;
+            * {
+             
+                font-size: 25px;
+                color: var(--white-color);
+            }
+        }
+
+        .title {
+font-family: var(--poppines-semi-bold);
+            font-size: var(--text-size);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--black-color);
+        }
+
+        .subtitle {
+            font-weight: 400;
+            font-size:calc(var(--input-txt-size) - 0.5px);
+            color: var(--black-color);
+            opacity: var(--text-opacity);
+            margin: 0;
+        }
+}

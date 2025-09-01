@@ -1,0 +1,80 @@
+.ServicesComponents {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 100px;
+  /* Inline SVG icon styling */
+}
+.ServicesComponents .card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 2rem;
+  border: none;
+}
+.ServicesComponents .icon-container {
+  width: 60px;
+  height: 60px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 1.5rem;
+}
+.ServicesComponents .icon-container span {
+  background-color: var(--black-color);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.ServicesComponents .icon-container span * {
+  font-size: 25px;
+  color: var(--white-color);
+}
+.ServicesComponents .title {
+  font-family: var(--poppines-semi-bold);
+  font-size: var(--text-size);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--black-color);
+}
+.ServicesComponents .subtitle {
+  font-weight: 400;
+  font-size: calc(var(--input-txt-size) - 0.5px);
+  color: var(--black-color);
+  opacity: var(--text-opacity);
+  margin: 0;
+}
