@@ -18,6 +18,8 @@ namespace Ecommerce.DataAccess.EntitiesConfigurations
             builder.Property(c => c.Name)
                    .IsRequired()
                    .HasMaxLength(100);
+            builder.Property(c => c.Description)
+                    .HasMaxLength(500);
 
             // Relationships
             builder.HasMany(c => c.Products)
