@@ -322,6 +322,123 @@ namespace Ecommerce.DataAccess.Services.Discount
             }
         }
 
+        public async Task<Response<List<GetActiveDiscountsResponse>>> GetActiveDiscountsAsync(GetActiveDiscountsRequest request)
+        {
+            try
+            {
+                var now = DateTime.UtcNow;
+
+                var query = _db.Discounts
+                    .AsNoTracking()
+                    .Where(d => d.IsActive && d.StartDate <= now && d.EndDate >= now);
+
+                if (request.ProductIds?.Any() == true)
+                {
+                    query = query.Where(d => d.Products.Any(p => request.ProductIds.Contains(p.ProductId)));
+                }
+
+                if (request.CategoryIds?.Any() == true)
+                {
+                    query = query.Where(d => d.Categories.Any(c => request.CategoryIds.Contains(c.CategoryId)));
+                }
+
+                var list = await query
+                    .Select(d => new GetActiveDiscountsResponse
+                    {
+                        Id = d.Id,
+                        Code = d.Code,
+                        Type = d.Type.ToString(),
+                        Value = d.Value,
+                        StartDate = d.StartDate,
+                        EndDate = d.EndDate,
+                        IsActive = d.IsActive
+                    })
+                    .ToListAsync();
+
+                if (!list.Any())
+                    return _response.NotFound<List<GetActiveDiscountsResponse>>("No active discounts found.");
+
+                return _response.Success(list, "Active discounts retrieved successfully.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error fetching active discounts");
+                return _response.ServerError<List<GetActiveDiscountsResponse>>("Failed to fetch discounts.");
+            }
+        }
+
+        public async Task<Response<ApplyDiscountResponse>> ApplyDiscountAsync(ApplyDiscountRequest request)
+        {
+            try
+            {
+                var discount = await _db.Discounts
+                    .Include(d => d.Products)
+                    .FirstOrDefaultAsync(d => d.Code == request.Code && d.IsActive);
+
+                if (discount == null)
+                    return _response.BadRequest<ApplyDiscountResponse>("Invalid or expired discount code.");
+
+                var now = DateTime.UtcNow;
+                if (now < discount.StartDate || now > discount.EndDate)
+                    return _response.BadRequest<ApplyDiscountResponse>("Discount code is expired.");
+
+                var products = await _db.Products
+                    .Where(p => request.ProductIds.Contains(p.Id))
+                    .Select(p => new { p.Id, p.Price })
+                    .ToListAsync();
+
+                if (!products.Any())
+                    return _response.BadRequest<ApplyDiscountResponse>("No valid products found.");
+
+                bool applicable = discount.Products.Any(p => request.ProductIds.Contains(p.ProductId));
+                if (!applicable)
+                    return _response.BadRequest<ApplyDiscountResponse>("Discount not applicable to selected products.");
+
+                decimal totalOriginal = products.Sum(p => p.Price);
+                decimal discountAmount = 0;
+                var productDetails = new List<ProductDiscountDetail>();
+
+                foreach (var product in products)
+                {
+                    decimal priceAfterDiscount = product.Price;
+
+                    if (discount.Type == DiscountType.Percentage)
+                    {
+                        priceAfterDiscount -= (priceAfterDiscount * (discount.Value / 100));
+                    }
+                    else if (discount.Type == DiscountType.FixedAmount)
+                    {
+                        priceAfterDiscount -= discount.Value;
+                        if (priceAfterDiscount < 0) priceAfterDiscount = 0; 
+                    }
+
+                    discountAmount += (product.Price - priceAfterDiscount);
+
+                    productDetails.Add(new ProductDiscountDetail
+                    {
+                        ProductId = product.Id,
+                        OriginalPrice = product.Price,
+                        PriceAfterDiscount = priceAfterDiscount
+                    });
+                }
+
+                var newTotal = totalOriginal - discountAmount;
+
+                return _response.Success(new ApplyDiscountResponse
+                {
+                    IsApplied = true,
+                    DiscountAmount = discountAmount,
+                    NewTotal = newTotal,
+                    Products = productDetails
+                }, "Discount applied successfully.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error applying discount");
+                return _response.ServerError<ApplyDiscountResponse>("Failed to apply discount.");
+            }
+        }
+
 
     }
 }
