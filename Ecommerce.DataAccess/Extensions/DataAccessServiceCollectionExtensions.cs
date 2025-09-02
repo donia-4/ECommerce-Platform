@@ -1,5 +1,6 @@
 ﻿using Ecommerce.DataAccess.ApplicationContext;
 using Ecommerce.DataAccess.Services.Auth;
+using Ecommerce.DataAccess.Services.Cart;
 using Ecommerce.DataAccess.Services.Category;
 using Ecommerce.DataAccess.Services.Discount;
 using Ecommerce.DataAccess.Services.Email;
@@ -41,6 +42,7 @@ namespace Ecommerce.DataAccess.Extensions
             services.AddScoped<IDiscountService, DiscountService>();
             services.AddScoped<IWishlistService, WishlistService>();    
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICartService, CartService>();
 
 
             return services;
