@@ -128,8 +128,8 @@ namespace Ecommerce.API.Controllers
                 return StatusCode((int)result.StatusCode, result);
 
             }
-            [HttpPost("discounts/active")]
-            public async Task<IActionResult> GetActiveDiscounts([FromBody] GetActiveDiscountsRequest request)
+            [HttpGet("discounts/active")]
+            public async Task<IActionResult> GetActiveDiscounts([FromQuery] GetActiveDiscountsRequest request)
             {
                 ValidationResult validationResult = await _activeDiscountsValidator.ValidateAsync(request);
                 if (!validationResult.IsValid)
