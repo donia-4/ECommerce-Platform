@@ -3,6 +3,7 @@ using System.Threading.RateLimiting;
 
 using Ecommerce.API.Validators;
 using Ecommerce.API.Validators.Discount;
+using Ecommerce.API.Validators.WishLists;
 using Ecommerce.DataAccess.ApplicationContext;
 using Ecommerce.Entities.Models.Auth.Identity;
 using Ecommerce.Utilities.Configurations;
@@ -121,6 +122,10 @@ namespace Ecommerce.API.Extensions
                 fv.RegisterValidatorsFromAssemblyContaining<CreateDiscountRequestValidator>();
                 fv.RegisterValidatorsFromAssemblyContaining<GetDiscountsQueryValidator>();
                 fv.RegisterValidatorsFromAssemblyContaining<UpdateDiscountRequestValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<RegisterBuyerRequestValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<WishlistAddItemValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<WishlistRemoveItemValidator>();
+
             });
             return services;
         }

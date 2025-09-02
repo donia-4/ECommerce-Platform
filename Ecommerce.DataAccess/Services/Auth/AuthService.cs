@@ -8,6 +8,7 @@ using Ecommerce.Entities.DTO.Account.Auth;
 using Ecommerce.Entities.DTO.Account.Auth.Login;
 using Ecommerce.Entities.DTO.Account.Auth.Register;
 using Ecommerce.Entities.DTO.Account.Auth.ResetPassword;
+using Ecommerce.Entities.Models.Auth;
 using Ecommerce.Entities.Models.Auth.Identity;
 using Ecommerce.Entities.Shared.Bases;
 
@@ -158,6 +159,86 @@ namespace Ecommerce.DataAccess.Services.Auth
             {
                 await transaction.RollbackAsync();
                 _logger.LogError(ex, "Error occurred during RegisterUserAsync for Email: {Email}", registerRequest.Email);
+                return _responseHandler.BadRequest<RegisterResponse>("An error occurred during registration.");
+            }
+        }
+
+        public async Task<Response<RegisterResponse>> RegisterBuyerAsync(RegisterBuyerRequest model)
+        {
+            _logger.LogInformation("RegisterBuyerAsync started for Email: {Email}", model.Email);
+
+            var emailPhoneCheck = await CheckIfEmailOrPhoneExists(model.Email, model.PhoneNumber);
+            if (emailPhoneCheck != null)
+            {
+                _logger.LogWarning("Registration failed: {Reason}", emailPhoneCheck);
+                return _responseHandler.BadRequest<RegisterResponse>(emailPhoneCheck);
+            }
+
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                var user = new User
+                {
+                    Email = model.Email,
+                    UserName = model.Email,
+                    PhoneNumber = model.PhoneNumber
+                };
+
+                var createUserResult = await _userManager.CreateAsync(user, model.Password);
+                if (!createUserResult.Succeeded)
+                {
+                    var errors = string.Join(", ", createUserResult.Errors.Select(e => e.Description));
+                    _logger.LogWarning("User creation failed for Email: {Email}. Errors: {Errors}", model.Email, errors);
+                    return _responseHandler.BadRequest<RegisterResponse>(errors);
+                }
+
+                var roleResult = await _userManager.AddToRoleAsync(user, "Buyer");
+                if (!roleResult.Succeeded)
+                {
+                    _logger.LogWarning("Failed to assign 'Buyer' role to user {UserId}", user.Id);
+                    return _responseHandler.BadRequest<RegisterResponse>("Failed to assign Buyer role.");
+                }
+
+                _logger.LogInformation("User created and role 'Buyer' assigned. ID: {UserId}", user.Id);
+
+                var buyer = new Buyer
+                {
+                    User = user,
+                    FullName = model.FullName,
+                    BirthDate = model.BirthDate,
+                    CreatedAt = DateTime.UtcNow
+                };
+
+                _context.Buyers.Add(buyer);
+
+                var tokens = await _tokenStoreService.GenerateAndStoreTokensAsync(user.Id, user);
+
+                var otp = await _otpService.GenerateAndStoreOtpAsync(user.Id);
+                await _emailService.SendOtpEmailAsync(user, otp);
+
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                _logger.LogInformation("Buyer registration completed successfully. Email sent to {Email}", model.Email);
+
+                var response = new RegisterResponse
+                {
+                    Id = user.Id,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber,
+                    UserName = model.FullName,
+                    Role = "Buyer",
+                    IsEmailConfirmed = false,
+                    AccessToken = tokens.AccessToken,
+                    RefreshToken = tokens.RefreshToken
+                };
+
+                return _responseHandler.Created(response, "Buyer registered successfully. Please check your email to receive the OTP.");
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                _logger.LogError(ex, "Error occurred during RegisterBuyerAsync for Email: {Email}", model.Email);
                 return _responseHandler.BadRequest<RegisterResponse>("An error occurred during registration.");
             }
         }
@@ -419,6 +500,10 @@ namespace Ecommerce.DataAccess.Services.Auth
             {
                 return _responseHandler.ServerError<string>($"An error occurred while changing password: {ex.Message}");
             }
+
         }
+
+        
+
     }
 }

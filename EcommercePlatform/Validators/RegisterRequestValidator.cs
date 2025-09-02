@@ -16,15 +16,11 @@ namespace Ecommerce.API.Validators
                 .NotEmpty().WithMessage("Phone number is required.")
                 .Matches(@"^\+?\d{10,15}$").WithMessage("Phone number must contain only digits and be between 10 and 15 characters.");
 
-            RuleFor(x => x.FirstName)
-                .NotEmpty().WithMessage("First name is required.")
-                .MinimumLength(2).WithMessage("First name must be at least 2 characters.")
-                .MaximumLength(50).WithMessage("First name cannot exceed 50 characters.");
+            RuleFor(x => x.FullName)
+                .NotEmpty().WithMessage("Full name is required.")
+                .MinimumLength(2).WithMessage("Full name must be at least 2 characters.")
+                .MaximumLength(50).WithMessage("Full name cannot exceed 50 characters.");
 
-            RuleFor(x => x.LastName)
-                .NotEmpty().WithMessage("Last name is required.")
-                .MinimumLength(2).WithMessage("Last name must be at least 2 characters.")
-                .MaximumLength(50).WithMessage("Last name cannot exceed 50 characters.");
 
             RuleFor(x => x.BirthDate)
                 .NotEmpty().WithMessage("Birth date is required.")

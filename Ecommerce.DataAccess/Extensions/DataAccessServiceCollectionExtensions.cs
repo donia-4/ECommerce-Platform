@@ -10,6 +10,7 @@ using Ecommerce.DataAccess.Services.ImageUploading;
 using Ecommerce.DataAccess.Services.OAuth;
 using Ecommerce.DataAccess.Services.OTP;
 using Ecommerce.DataAccess.Services.Token;
+using Ecommerce.DataAccess.Services.Wishlist;
 using Ecommerce.Utilities.Configurations;
 
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +39,7 @@ namespace Ecommerce.DataAccess.Extensions
             services.AddScoped<IAuthGoogleService, AuthGoogleService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IDiscountService, DiscountService>();
+            services.AddScoped<IWishlistService, WishlistService>();    
 
             return services;
         }

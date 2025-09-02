@@ -28,10 +28,11 @@ namespace Ecommerce.API.Controllers
         private readonly IValidator<ForgetPasswordRequest> _forgetPasswordValidator;
         private readonly IValidator<ResetPasswordRequest> _resetPasswordValidator;
         private readonly IValidator<ChangePasswordRequest> _changePasswordValidator;
+        private readonly IValidator<RegisterBuyerRequest> _registerBuyerValidator;
         private readonly IAuthGoogleService _authGoogleService;
 
 
-        public AccountController(IAuthService authService, ResponseHandler responseHandler, IValidator<RegisterRequest> registerValidator, IValidator<LoginRequest> loginValidator, IValidator<ForgetPasswordRequest> forgetPasswordValidator, IValidator<ResetPasswordRequest> resetPasswordValidator, IAuthGoogleService authGoogleService, IValidator<ChangePasswordRequest> changePasswordValidator)
+        public AccountController(IAuthService authService, ResponseHandler responseHandler, IValidator<RegisterRequest> registerValidator, IValidator<LoginRequest> loginValidator, IValidator<ForgetPasswordRequest> forgetPasswordValidator, IValidator<ResetPasswordRequest> resetPasswordValidator, IAuthGoogleService authGoogleService, IValidator<ChangePasswordRequest> changePasswordValidator, IValidator<RegisterBuyerRequest> registerBuyerValidator)
         {
             _authService = authService;
             _responseHandler = responseHandler;
@@ -41,6 +42,7 @@ namespace Ecommerce.API.Controllers
             _resetPasswordValidator = resetPasswordValidator;
             _authGoogleService = authGoogleService;
             _changePasswordValidator = changePasswordValidator;
+            _registerBuyerValidator = registerBuyerValidator;
         }
         [HttpPost("login")]
         public async Task<ActionResult<Response<LoginResponse>>> Login([FromBody] LoginRequest request)
@@ -100,6 +102,25 @@ namespace Ecommerce.API.Controllers
             var response = await _authService.RegisterAsync(request);
             return StatusCode((int)response.StatusCode, response);
         }
+        [HttpPost("register/buyer")]
+        [AllowAnonymous]
+        public async Task<IActionResult> RegisterBuyer([FromBody] RegisterBuyerRequest request)
+        {
+            ValidationResult validationResult = await _registerBuyerValidator.ValidateAsync(request);
+            if (!validationResult.IsValid)
+            {
+                string errors = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
+                return StatusCode((int)_responseHandler.BadRequest<object>(errors).StatusCode,
+                    _responseHandler.BadRequest<object>(errors));
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _authService.RegisterBuyerAsync(request);
+            return StatusCode((int)result.StatusCode, result);
+        }
+
 
         [HttpPost("verify-otp")]
         public async Task<ActionResult<Response<bool>>> VerifyOtp([FromBody] VerifyOtpRequest model)
