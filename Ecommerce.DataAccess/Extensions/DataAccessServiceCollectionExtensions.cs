@@ -1,7 +1,4 @@
-﻿using System.Net;
-using System.Net.Mail;
-
-using Ecommerce.DataAccess.ApplicationContext;
+﻿using Ecommerce.DataAccess.ApplicationContext;
 using Ecommerce.DataAccess.Services.Auth;
 using Ecommerce.DataAccess.Services.Category;
 using Ecommerce.DataAccess.Services.Discount;
@@ -9,12 +6,15 @@ using Ecommerce.DataAccess.Services.Email;
 using Ecommerce.DataAccess.Services.ImageUploading;
 using Ecommerce.DataAccess.Services.OAuth;
 using Ecommerce.DataAccess.Services.OTP;
+using Ecommerce.DataAccess.Services.ProductService;
 using Ecommerce.DataAccess.Services.Token;
+using Ecommerce.Services.Interfaces;
 using Ecommerce.Utilities.Configurations;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Net;
+using System.Net.Mail;
 
 namespace Ecommerce.DataAccess.Extensions
 {
@@ -38,6 +38,7 @@ namespace Ecommerce.DataAccess.Extensions
             services.AddScoped<IAuthGoogleService, AuthGoogleService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IDiscountService, DiscountService>();
+            services.AddScoped<IProductService, ProductService>();
 
             return services;
         }
