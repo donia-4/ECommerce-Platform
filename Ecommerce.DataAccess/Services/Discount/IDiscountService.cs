@@ -17,5 +17,9 @@ namespace Ecommerce.DataAccess.Services.Discount
         Task<Response<bool>> DeactivateAsync(Guid id);
         Task<Response<bool>> DeleteAsync(Guid id);
         Task<Response<PaginatedList<GetDiscountResponse>>> GetPaginatedAsync(GetDiscountsQuery query);
+        Task<Response<List<GetActiveDiscountsResponse>>> GetActiveDiscountsAsync(GetActiveDiscountsRequest request);
+        Task<Response<ApplyDiscountResponse>> ApplyDiscountAsync(ApplyDiscountRequest request);
+
+
     }
 }
