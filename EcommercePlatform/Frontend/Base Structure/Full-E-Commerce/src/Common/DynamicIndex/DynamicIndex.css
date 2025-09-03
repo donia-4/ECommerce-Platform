@@ -1,0 +1,29 @@
+.DynamicIndex
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 55px;
+    padding: 0px 50px;
+    font-size: 13px;
+    font-weight: bolder;
+    color: var(--sec-grey-color);
+    margin-top: 20px;
+}
+
+.DynamicIndex p:last-child
+{
+    font-weight: normal;
+}
+
+.DynamicIndex p:last-child 
+{
+    margin: 0px 2px;
+}
+
+.DynamicIndex p:last-child span
+{
+    color: var(--black-color);
+    font-weight: bolder;
+    margin-left: 5px;
+}

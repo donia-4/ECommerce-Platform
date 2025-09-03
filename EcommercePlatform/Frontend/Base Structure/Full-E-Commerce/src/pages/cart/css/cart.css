@@ -1,0 +1,257 @@
+@charset "UTF-8";
+.Cart {
+  /* style.css */
+  /* Specific alignment for columns */
+  /* Quantity control styling remains the same */
+}
+.Cart .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  gap: 30px;
+}
+.Cart .cart-wrapper {
+  width: 900px;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: var(--text-size);
+  padding: 0px 10px;
+}
+.Cart .cart-table {
+  width: 100%;
+  border-collapse: separate; /* Removes spacing between cells */
+  border-spacing: 0px 50px;
+}
+.Cart .cart-table thead tr {
+  color: var(--black-color);
+}
+.Cart .cart-table tr {
+  -webkit-box-shadow: 0 0px 30px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 0px 30px rgba(0, 0, 0, 0.05);
+}
+.Cart .cart-table th, .Cart .cart-table td {
+  padding: 15px 25px;
+  text-align: left;
+  font-weight: normal !important;
+}
+.Cart .cart-table td {
+  font-size: var(--input-txt-size);
+  padding: 8px 25px;
+}
+.Cart .cart-table th:nth-child(2),
+.Cart .cart-table td.price-cell,
+.Cart .cart-table th:nth-child(3),
+.Cart .cart-table td.quantity-cell,
+.Cart .cart-table th:nth-child(4),
+.Cart .cart-table td.subtotal-cell {
+  text-align: center;
+}
+.Cart .cart-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.Cart .product-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 15px;
+}
+.Cart .remove-icon {
+  color: var(--red-color) !important;
+  font-size: var(--input-txt-size);
+  cursor: pointer;
+  font-weight: 600;
+  line-height: 1;
+  background-color: var(--grey-color);
+  width: 18px !important;
+  height: 18px !important;
+  padding: 10px !important;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: var(--hover-transition);
+  transition: var(--hover-transition);
+}
+.Cart .remove-icon:hover {
+  color: var(--red-hover);
+  background-color: var(--grey-hover);
+}
+.Cart .product-image {
+  width: 50px;
+  height: 50px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  border-radius: 4px;
+}
+.Cart .product-name {
+  font-weight: 500;
+  color: #333;
+}
+.Cart .quantity-control {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  width: 50px;
+  height: 30px;
+  margin: 0 auto;
+}
+.Cart .quantity-input {
+  width: 30px;
+  border: none;
+  text-align: center;
+  font-size: var(--input-txt-size);
+  padding: 0;
+  height: 100%;
+  outline: none;
+}
+.Cart .quantity-input::-webkit-outer-spin-button,
+.Cart .quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.Cart .quantity-arrows {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+  width: 15px;
+  border-left: 1px solid #eee;
+}
+.Cart .arrow-up,
+.Cart .arrow-down {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  font-size: 8px;
+  color: var(--black-color);
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+.Cart .arrow-up:hover,
+.Cart .arrow-down:hover {
+  background-color: #f0f0f0;
+}
+.Cart .arrow-up::before {
+  content: "▲";
+}
+.Cart .arrow-down::before {
+  content: "▼";
+}
+.Cart .arrow-up {
+  border-bottom: 1px solid #eee;
+}
+
+.buttons {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.total {
+  margin-top: 50px;
+  border: var(--border);
+  padding: 10px 22px;
+  text-transform: capitalize;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 5px;
+}
+.total p {
+  width: 230px !important;
+}
+
+.coupoun {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 8px;
+  gap: 2px;
+  font-size: var(--input-txt-size);
+}
+.coupoun input {
+  border: var(--border);
+  padding: 5px 10px;
+  width: 180px;
+  border-radius: 2px;
+  outline: none;
+}
+.coupoun .RedButton {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  margin: 0px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 0px;
+}
+.coupoun .RedButton button {
+  font-size: 8px !important;
+  padding: 8px 8px;
+}
