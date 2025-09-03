@@ -125,6 +125,8 @@ namespace Ecommerce.API.Extensions
                 fv.RegisterValidatorsFromAssemblyContaining<RegisterBuyerRequestValidator>();
                 fv.RegisterValidatorsFromAssemblyContaining<WishlistAddItemValidator>();
                 fv.RegisterValidatorsFromAssemblyContaining<WishlistRemoveItemValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<UpdateCartItemRequestValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<AddToCartRequestValidator>();
 
             });
             return services;
