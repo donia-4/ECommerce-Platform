@@ -89,7 +89,7 @@ namespace Ecommerce.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<Response<RegisterResponse>>> Register([FromForm] RegisterRequest request)
+        public async Task<ActionResult<Response<RegisterResponse>>> Register([FromBody] RegisterRequest request)
         {
             ValidationResult validationResult = await _registerValidator.ValidateAsync(request);
             if (!validationResult.IsValid)

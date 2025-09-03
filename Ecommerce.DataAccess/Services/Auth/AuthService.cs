@@ -47,7 +47,7 @@ namespace Ecommerce.DataAccess.Services.Auth
         public async Task<Response<LoginResponse>> LoginAsync(LoginRequest loginRequest)
         {
             // Find user by email or phone number
-            User? user = await FindUserByEmailOrPhoneAsync(loginRequest.Email, loginRequest.PhoneNumber);
+            User? user = await FindUserByEmailAsync(loginRequest.Email);
 
             if (user == null)
                 return _responseHandler.NotFound<LoginResponse>("User not found.");
@@ -61,23 +61,23 @@ namespace Ecommerce.DataAccess.Services.Auth
                 return _responseHandler.BadRequest<LoginResponse>("Email is not verified. Please verify your email first.");
 
             // If OTP is not provided, generate and send OTP
-            if (string.IsNullOrEmpty(loginRequest.Otp))
-            {
-                var otp = await _otpService.GenerateAndStoreOtpAsync(user.Id);
-                await _emailService.SendOtpEmailAsync(user, otp);
-                return _responseHandler.Success<LoginResponse>(null, "OTP sent to your email. Please provide the OTP to complete login.");
-            }
+            //if (string.IsNullOrEmpty(loginRequest.Otp))
+            //{
+            //    //var otp = await _otpService.GenerateAndStoreOtpAsync(user.Id);
+            //    //await _emailService.SendOtpEmailAsync(user, otp);
+            //    return _responseHandler.Success<LoginResponse>(null, "OTP sent to your email. Please provide the OTP to complete login.");
+            //}
 
             // Get user roles
             var roles = await _userManager.GetRolesAsync(user);
 
 
             // Verify OTP
-            var isOtpValid = await _otpService.ValidateOtpAsync(user.Id, loginRequest.Otp);
-            if (!isOtpValid)
-                return _responseHandler.BadRequest<LoginResponse>("Invalid or expired OTP.");
+            //var isOtpValid = await _otpService.ValidateOtpAsync(user.Id, loginRequest.Otp);
+            //if (!isOtpValid)
+            //    return _responseHandler.BadRequest<LoginResponse>("Invalid or expired OTP.");
 
-            // Generate tokens
+            //// Generate tokens
             var tokens = await _tokenStoreService.GenerateAndStoreTokensAsync(user.Id, user);
 
             var response = new LoginResponse
@@ -113,6 +113,7 @@ namespace Ecommerce.DataAccess.Services.Auth
                     UserName = registerRequest.Email, // Modify it by what you need
                     Email = registerRequest.Email,
                     PhoneNumber = registerRequest.PhoneNumber,
+                    EmailConfirmed = true
                 };
 
                 var createUserResult = await _userManager.CreateAsync(user, registerRequest.Password);
@@ -179,7 +180,8 @@ namespace Ecommerce.DataAccess.Services.Auth
                 {
                     Email = model.Email,
                     UserName = model.Email,
-                    PhoneNumber = model.PhoneNumber
+                    PhoneNumber = model.PhoneNumber,
+                    EmailConfirmed = true
                 };
 
                 var createUserResult = await _userManager.CreateAsync(user, model.Password);
@@ -211,8 +213,8 @@ namespace Ecommerce.DataAccess.Services.Auth
 
                 var tokens = await _tokenStoreService.GenerateAndStoreTokensAsync(user.Id, user);
 
-                var otp = await _otpService.GenerateAndStoreOtpAsync(user.Id);
-                await _emailService.SendOtpEmailAsync(user, otp);
+                //var otp = await _otpService.GenerateAndStoreOtpAsync(user.Id);
+                //await _emailService.SendOtpEmailAsync(user, otp);
 
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
@@ -243,14 +245,14 @@ namespace Ecommerce.DataAccess.Services.Auth
 
         public async Task<Response<ForgetPasswordResponse>> ForgotPasswordAsync(ForgetPasswordRequest model)
         {
-            _logger.LogInformation("Starting ForgotPasswordAsync for Email: {Email}, Phone: {Phone}", model.Email, model.PhoneNumber);
+            _logger.LogInformation("Starting ForgotPasswordAsync for Email: {Email}", model.Email);
 
             // Find user by email or phone number
-            User? user = await FindUserByEmailOrPhoneAsync(model.Email, model.PhoneNumber);
+            User? user = await FindUserByEmailAsync(model.Email);
 
             if (user == null)
             {
-                _logger.LogWarning("User not found for Email: {Email}, Phone: {Phone}", model.Email, model.PhoneNumber);
+                _logger.LogWarning("User not found for Email: {Email}", model.Email);
                 return _responseHandler.NotFound<ForgetPasswordResponse>("User not found.");
             }
 
@@ -286,16 +288,16 @@ namespace Ecommerce.DataAccess.Services.Auth
                 return _responseHandler.NotFound<ResetPasswordResponse>("User not found.");
             }
 
-            // Verify OTP
-            _logger.LogInformation("Validating OTP for User ID: {UserId}", user.Id);
-            var isOtpValid = await _otpService.ValidateOtpAsync(model.UserId, model.Otp);
-            if (!isOtpValid)
-            {
-                _logger.LogWarning("Invalid or expired OTP for User ID: {UserId}", model.UserId);
-                return _responseHandler.BadRequest<ResetPasswordResponse>("Invalid or expired OTP.");
+            //// Verify OTP
+            //_logger.LogInformation("Validating OTP for User ID: {UserId}", user.Id);
+            //var isOtpValid = await _otpService.ValidateOtpAsync(model.UserId, model.Otp);
+            //if (!isOtpValid)
+            //{
+            //    _logger.LogWarning("Invalid or expired OTP for User ID: {UserId}", model.UserId);
+            //    return _responseHandler.BadRequest<ResetPasswordResponse>("Invalid or expired OTP.");
 
-            }
-            _logger.LogInformation("OTP is valid. Proceeding to reset password for User ID: {UserId}", user.Id);
+            //}
+            //_logger.LogInformation("OTP is valid. Proceeding to reset password for User ID: {UserId}", user.Id);
 
             // Reset password
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
@@ -317,7 +319,7 @@ namespace Ecommerce.DataAccess.Services.Auth
             {
                 UserId = user.Id,
                 Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
+                //PhoneNumber = user.PhoneNumber,
                 Role = roles.FirstOrDefault() ?? "USER"
             };
             _logger.LogInformation("ResetPasswordAsync completed successfully for User ID: {UserId}", user.Id);
@@ -425,12 +427,11 @@ namespace Ecommerce.DataAccess.Services.Auth
                 return "Phone number is already registered.";
             return null;
         }
-        private async Task<User?> FindUserByEmailOrPhoneAsync(string email, string phone)
+        private async Task<User?> FindUserByEmailAsync(string email)
         {
             if (!string.IsNullOrEmpty(email))
                 return await _userManager.FindByEmailAsync(email);
-            if (!string.IsNullOrEmpty(phone))
-                return await _userManager.Users.FirstOrDefaultAsync(u => u.PhoneNumber == phone);
+           
             return null;
         }
 

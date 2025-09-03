@@ -11,9 +11,9 @@ namespace Ecommerce.API.Validators
             RuleFor(x => x.UserId)
                 .NotEmpty().WithMessage("User ID is required.");
 
-            RuleFor(x => x.Otp)
-                .NotEmpty().WithMessage("OTP is required.")
-                .Length(6).WithMessage("OTP must be 6 characters long.");
+            //RuleFor(x => x.Otp)
+            //    .NotEmpty().WithMessage("OTP is required.")
+            //    .Length(6).WithMessage("OTP must be 6 characters long.");
 
             RuleFor(x => x.NewPassword)
                 .NotEmpty().WithMessage("New password is required.")

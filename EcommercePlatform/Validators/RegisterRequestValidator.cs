@@ -12,9 +12,9 @@ namespace Ecommerce.API.Validators
                 .NotEmpty().WithMessage("Email is required.")
                 .EmailAddress().WithMessage("Email must be valid (e.g., user@example.com).");
 
-            RuleFor(x => x.PhoneNumber)
-                .NotEmpty().WithMessage("Phone number is required.")
-                .Matches(@"^\+?\d{10,15}$").WithMessage("Phone number must contain only digits and be between 10 and 15 characters.");
+            //RuleFor(x => x.PhoneNumber)
+            //    .NotEmpty().WithMessage("Phone number is required.")
+            //    .Matches(@"^\+?\d{10,15}$").WithMessage("Phone number must contain only digits and be between 10 and 15 characters.");
 
             RuleFor(x => x.FullName)
                 .NotEmpty().WithMessage("Full name is required.")
