@@ -49,7 +49,7 @@ nav
         border-bottom: var(--sec-border);
         color: var(--black-color);
 @include between-center;
-padding: 25px 70px 2px 52px;
+padding: 25px 70px 20px 52px;
 
       > div
         {
@@ -152,4 +152,114 @@ font-size:18px;
 
         }
     }
+}
+
+
+
+@media (max-width:1004px) {
+
+
+
+ nav .bottom > div:first-child
+ {
+    width: 200px;
+ }
+}
+
+
+@media (max-width:948px) {
+
+
+nav .top{
+justify-content: flex-start !important;
+padding: 10px;
+}
+nav .top p:last-child
+{
+    right: 10px;
+}
+}
+@media (max-width:860px) {
+
+
+    .nav-item
+    {
+        display: block !important;
+    }
+    .nav_links
+    {
+        display: none !important;
+    }
+nav .bottom > div:nth-of-type(3)
+{
+    width: 100%;
+    justify-content: space-around;
+
+    .search input 
+    {
+        width:300px;
+    }
+
+}
+    
+ 
+}
+
+
+@media (max-width:698px) {
+nav .bottom 
+{
+    flex-direction: column !important;
+        padding: 25px 23px 20px 19px;
+}
+
+nav .bottom > div:first-child
+{
+    @include Centering;
+    margin-bottom: 10px;
+    
+}
+
+ nav .bottom > div:nth-of-type(3)
+ {
+    width: 100% !important;
+ }
+
+    nav .bottom > div:nth-of-type(3) .search input {
+        width: 400px !important;
+    }
+
+nav .top p
+{
+    font-size: 9px;
+}
+}
+
+
+@media (max-width:574px) {
+nav .bottom > div:nth-of-type(3)
+{
+    justify-content:center !important;
+}
+   nav .bottom > div:nth-of-type(3) .search input {
+        width: 250px !important;
+    }
+    nav .top p
+{
+    font-size: 7px;
+}
+}
+
+
+@media (max-width:442px) {
+nav .bottom > div:nth-of-type(3)
+{
+    flex-direction: column;
+}
+
+nav .top p:last-child
+{
+    top: 26px;
+}
+
 }

@@ -3,6 +3,9 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from './components/layout/layout';
 import HomePage from './pages/homePage.jsx';
 import Cart from './pages/cart/cart.jsx';
+import Signup from './pages/signup/signup.jsx';
+import Login from './pages/login/login.jsx';
+
 
  function App() {
   const router = createBrowserRouter([
@@ -11,7 +14,9 @@ import Cart from './pages/cart/cart.jsx';
       element: <Layout/>,
     children:[
       {path:"",element:<HomePage/>},
-      {path:"cart",element:<Cart/>}
+      {path:"cart",element:<Cart/>},
+      {path:"signup",element:<Signup/>},
+      {path:"login",element:<Login/>}
     ]
     },
     ,

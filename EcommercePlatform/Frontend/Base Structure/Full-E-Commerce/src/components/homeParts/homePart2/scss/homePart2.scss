@@ -109,3 +109,36 @@ font-size: 27px;
         padding: 10px 0px;
     }
 }
+
+@media (max-width:578px) {
+    
+    .HomeHeader .title-text h2
+    {
+    --header-size:20px;
+    }
+}
+
+@media (max-width:384px) {
+    .HomeHeader .title-text p
+    {
+        font-size: 0.5rem;
+    }
+.HomePart2 .arrow
+{
+    width: 20px;
+    height: 20px;
+    font-size: 0.5rem;
+}
+.HomeHeader .title-text h2
+{
+--header-size:15px;
+}
+}
+@media (max-width:324px) {
+    
+
+.HomeHeader .title-text h2
+{
+--header-size:12px;
+}
+}

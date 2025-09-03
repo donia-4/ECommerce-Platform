@@ -63,7 +63,7 @@ nav .bottom {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 25px 70px 2px 52px;
+  padding: 25px 70px 20px 52px;
 }
 nav .bottom > div {
   width: 420px;
@@ -180,4 +180,91 @@ nav .bottom > div:nth-of-type(3) .links a {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+@media (max-width: 1004px) {
+  nav .bottom > div:first-child {
+    width: 200px;
+  }
+}
+@media (max-width: 948px) {
+  nav .top {
+    -webkit-box-pack: start !important;
+        -ms-flex-pack: start !important;
+            justify-content: flex-start !important;
+    padding: 10px;
+  }
+  nav .top p:last-child {
+    right: 10px;
+  }
+}
+@media (max-width: 860px) {
+  .nav-item {
+    display: block !important;
+  }
+  .nav_links {
+    display: none !important;
+  }
+  nav .bottom > div:nth-of-type(3) {
+    width: 100%;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  nav .bottom > div:nth-of-type(3) .search input {
+    width: 300px;
+  }
+}
+@media (max-width: 698px) {
+  nav .bottom {
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+            flex-direction: column !important;
+    padding: 25px 23px 20px 19px;
+  }
+  nav .bottom > div:first-child {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-bottom: 10px;
+  }
+  nav .bottom > div:nth-of-type(3) {
+    width: 100% !important;
+  }
+  nav .bottom > div:nth-of-type(3) .search input {
+    width: 400px !important;
+  }
+  nav .top p {
+    font-size: 9px;
+  }
+}
+@media (max-width: 574px) {
+  nav .bottom > div:nth-of-type(3) {
+    -webkit-box-pack: center !important;
+        -ms-flex-pack: center !important;
+            justify-content: center !important;
+  }
+  nav .bottom > div:nth-of-type(3) .search input {
+    width: 250px !important;
+  }
+  nav .top p {
+    font-size: 7px;
+  }
+}
+@media (max-width: 442px) {
+  nav .bottom > div:nth-of-type(3) {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  nav .top p:last-child {
+    top: 26px;
+  }
 }

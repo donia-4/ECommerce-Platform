@@ -128,3 +128,33 @@
   );
   filter: blur(50px);
 }
+
+
+
+@media(max-width:455px)
+{
+    .HomePart2 .swiper-wrapper
+    {
+        padding: 0px 70px;
+    }
+}
+
+@media(max-width:332px)
+{
+.HomePart2 .category-item
+    {
+width: 100px;
+height: 100px;
+font-size: 11px;
+    }
+    .HomePart2 .icon *
+    {
+        font-size: 16px;
+
+    }
+        .HomePart2 .swiper-wrapper
+
+        {
+            padding: 0px 20px;
+        }
+}

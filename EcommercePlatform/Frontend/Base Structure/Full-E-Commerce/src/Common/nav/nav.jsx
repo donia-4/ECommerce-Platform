@@ -5,6 +5,8 @@ import { IoIosArrowDown } from "react-icons/io";
 import { AiOutlineHeart } from "react-icons/ai";
 import { PiShoppingCartLight } from "react-icons/pi";
 import { IoSearchOutline } from "react-icons/io5";
+
+import { MdMenu } from "react-icons/md";
 export default function Nav()
 {
  
@@ -20,9 +22,9 @@ export default function Nav()
 </div>
 <div className="bottom">
 <div>
-    <p>Exclusive</p>
+    <p style={{margin:"0px"}}>Exclusive</p>
 </div>
-<div>
+<div className="nav_links">
    <NavLink to="">Home</NavLink>
    <NavLink to="/contact">Contact</NavLink>
    <NavLink to="/about">About</NavLink>
@@ -39,7 +41,21 @@ export default function Nav()
 <div className="links">
     <Link to="/whishlist" className="wishList"><AiOutlineHeart/></Link>
     <Link to="/cart" className="Cart"><PiShoppingCartLight/></Link>
+    <div class="nav-item dropdown" style={{position:"unset",display:"none"}}>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<MdMenu style={{fontSize:"20px"}}/>
+        </a>
+        <div class="dropdown-menu" style={{position:"absolute",zIndex:555}} aria-labelledby="navbarDropdownMenuLink">
+         
+            <NavLink className="dropdown-item" to="">Home</NavLink>
+   <NavLink className="dropdown-item" to="/contact">Contact</NavLink>
+   <NavLink className="dropdown-item" to="/about">About</NavLink>
+   <NavLink className="dropdown-item" to="/signup">Sign Up   </NavLink>
+        </div>
+      </div>
 </div>
+    
+
 </div>
 
 </div>

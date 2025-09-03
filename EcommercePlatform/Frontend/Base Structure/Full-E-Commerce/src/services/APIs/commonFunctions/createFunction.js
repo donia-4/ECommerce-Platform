@@ -13,9 +13,9 @@ export default async function CreateAPi_Function (initialUrl,intialData){
     
 
 // Http  level error (status code) 
-    if(!res.ok) {
+  /*   if(!res.ok) {
         throw new Error (`Create HTTP error!${res.status} `);
-    } 
+    }  */
 
 
 const contentType = res.headers.get("content-type");

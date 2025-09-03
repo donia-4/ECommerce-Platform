@@ -180,3 +180,210 @@
 .HomePart4 .right .down .text p {
   font-size: 12px;
 }
+
+@media (max-width: 765px) {
+  .HomePart3 .title {
+    font-size: 25px;
+  }
+  .HomePart3 .buy-button a {
+    padding: 10px 25px;
+    font-size: 12px;
+  }
+  .HomePart3 .countdown-item {
+    width: 45px;
+    height: 45px;
+  }
+  .HomePart3 .countdown-item * {
+    font-size: 12px;
+  }
+  .HomePart3 .countdown-label {
+    font-size: 8px;
+  }
+  .HomePart3 .container {
+    height: 350px;
+  }
+}
+@media (max-width: 601px) {
+  .HomePart3 .title {
+    font-size: 20px;
+  }
+  .HomePart3 .countdown-item {
+    width: 40px;
+    height: 40px;
+  }
+  .HomePart3 .countdown-item * {
+    font-size: 10px;
+  }
+  .HomePart3 .countdown-label {
+    font-size: 6px;
+  }
+}
+@media (max-width: 578px) {
+  :root {
+    --pages-padding:100px 10px ;
+  }
+  .HomePart3 .title {
+    font-size: 15px;
+  }
+  .HomePart3 .buy-button a {
+    padding: 10px 30px;
+    font-size: 8px;
+  }
+  .HomePart3 .countdown-item {
+    width: 32px;
+    height: 32px;
+  }
+  .HomePart3 .countdown-item * {
+    font-size: 8px;
+  }
+  .HomePart3 .countdown-label {
+    font-size: 5px;
+  }
+  .HomePart3 .container {
+    height: 300px;
+  }
+  .HomePart3 .countdown-container {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: auto 10px auto;
+    grid-template-columns: auto auto;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap: 10px;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  .HomePart3 .text {
+    padding-left: 10px;
+  }
+}
+@media (max-width: 350px) {
+  .HomePart3 .title, .HomePart3 .category-text {
+    font-size: 10px;
+  }
+  .HomePart3 .buy-button a {
+    padding: 8px 10px;
+    font-size: 7px;
+  }
+  .HomePart3 .countdown-item {
+    width: 25px;
+    height: 25px;
+  }
+  .HomePart3 .countdown-item * {
+    font-size: 5px;
+  }
+  .HomePart3 .countdown-label {
+    font-size: 5px;
+  }
+}
+@media (max-width: 296px) {
+  .HomePart3 .title, .HomePart3 .category-text {
+    font-size: 8px;
+  }
+  .HomePart3 .buy-button a {
+    padding: 8px 5px;
+    font-size: 5px;
+  }
+  .HomePart3 .countdown-item {
+    width: 18px;
+    height: 18px;
+  }
+  .HomePart3 .countdown-label {
+    font-size: 2px;
+  }
+}
+@media (max-width: 940px) {
+  .HomePart4 .container .left {
+    width: 350px;
+    height: 400px;
+  }
+  .HomePart4 .container .right .top {
+    width: 350px;
+    height: 200px;
+  }
+  .HomePart4 .container .down .image {
+    width: 165px;
+    height: 180px;
+  }
+  .HomePart4 .container .down .image .img-item {
+    width: 100px;
+    height: 100px;
+  }
+}
+@media (max-width: 830px) {
+  /*     .HomePart4 .container .left
+      {
+          width: 300px;
+          height:350px ;
+      }
+      .HomePart4 .container .right .top
+      {
+              width: 300px;
+              height: 160px;
+      }
+      .HomePart4 .container .down .image
+      {
+          width: 140px;
+          height: 170px;
+      } */
+  .HomePart4 .container {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 100%;
+    gap: 20px;
+  }
+  .HomePart4 .container > div, .HomePart4 .container .right .top, .HomePart4 .container .down .image > * {
+    width: 100% !important;
+  }
+  .HomePart4 .text {
+    font-size: 10px;
+  }
+}
+@media (max-width: 412px) {
+  .HomePart4 .right .down .text h3 {
+    font-size: 13px;
+  }
+  .HomePart4 .right .down .text p {
+    font-size: 8px;
+  }
+  .HomePart4 .text h3 {
+    font-size: 18px !important;
+  }
+  .HomePart4 .text p {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  .HomePart4 .container .left .image {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  .HomePart4 .container .right .top img {
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .HomePart4 .container .down {
+    width: 100%;
+    height: 120px;
+  }
+  .HomePart4 .container .down .image {
+    width: 100%;
+  }
+  .HomePart4 .left .text {
+    bottom: 50px;
+  }
+}

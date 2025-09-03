@@ -8,6 +8,8 @@ import {ProductContext} from "../context/productContext/productContext"
 import { useContext, useEffect } from "react"
 import SignUp_Api from "../services/APIs/signup.js";
 import GenerateToken from "../services/APIs/generateToken.js"
+import Login_Api from "../services/APIs/login.js"
+import ReGenerateToken from "../services/APIs/reGenerateToken.js"
 export default function HomePage()
 {
 
@@ -15,6 +17,15 @@ export default function HomePage()
 
 
     useEffect(()=>{
+
+        if(localStorage.getItem("userData")!=null ||localStorage.getItem("userData")!=undefined)
+        {
+            let userData= JSON.parse(localStorage.getItem("userData")) ;
+/*             console.log({"idToken":tokenData.accessToken});
+ */            
+
+        
+        }
     },[])
 
 

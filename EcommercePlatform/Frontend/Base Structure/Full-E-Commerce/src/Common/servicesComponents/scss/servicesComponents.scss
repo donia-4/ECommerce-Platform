@@ -10,6 +10,8 @@
             @include Col-Centering;
             padding: 2rem;
             border: none;
+            width: 200px;
+            height: 260px;
         }
 
         .icon-container {
@@ -53,4 +55,46 @@ font-family: var(--poppines-semi-bold);
             opacity: var(--text-opacity);
             margin: 0;
         }
+}
+
+@media (max-width:810px) {
+.ServicesComponents
+{
+    gap: 50px;
+}
+    .ServicesComponents .title
+    {      
+
+        font-size: 10px;
+    }
+    .ServicesComponents .subtitle
+    {
+        font-size: 9px;
+      
+    }
+}
+@media (max-width:543px) {
+.ServicesComponents
+{
+    gap: 20px;
+}
+
+  .ServicesComponents .title
+    {      
+
+        font-size: 8px;
+    }
+    .ServicesComponents .subtitle
+    {
+        font-size: 8px;
+      
+    }
+    
+}
+@media (max-width:513px) {
+.ServicesComponents
+{
+    flex-direction: column;
+}
+    
 }

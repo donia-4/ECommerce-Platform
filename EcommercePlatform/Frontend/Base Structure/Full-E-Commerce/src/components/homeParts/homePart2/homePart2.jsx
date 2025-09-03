@@ -92,12 +92,27 @@ const categories=[
   }}
  modules={[Navigation]} className="mySwiper"
    slidesPerView={6}
+   breakpoints={{
+
+    "200":{
+        slidesPerView:1
+    },
+    "455":{
+        slidesPerView:2
+    },
+    "630":{
+        slidesPerView:3
+    },
+    "823":{
+        slidesPerView:4
+    }
+   }}
 >
 <div className="categories-container">
     {
         categories.map((item,index)=>{
             return( 
-             <SwiperSlide>
+             <SwiperSlide key={index}>
    
                 <div key={index}  
                 onClick={()=>{setActCateg(item.name)}}
