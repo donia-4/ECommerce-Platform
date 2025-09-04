@@ -3,8 +3,10 @@ using System.Threading.RateLimiting;
 
 using Ecommerce.API.Validators;
 using Ecommerce.API.Validators.Discount;
+using Ecommerce.API.Validators.Stripe;
 using Ecommerce.API.Validators.WishLists;
 using Ecommerce.DataAccess.ApplicationContext;
+using Ecommerce.Entities.DTO.Stripe;
 using Ecommerce.Entities.Models.Auth.Identity;
 using Ecommerce.Utilities.Configurations;
 
@@ -127,7 +129,10 @@ namespace Ecommerce.API.Extensions
                 fv.RegisterValidatorsFromAssemblyContaining<WishlistRemoveItemValidator>();
                 fv.RegisterValidatorsFromAssemblyContaining<UpdateCartItemRequestValidator>();
                 fv.RegisterValidatorsFromAssemblyContaining<AddToCartRequestValidator>();
-
+                fv.RegisterValidatorsFromAssemblyContaining<CreateCheckoutSessionRequestValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<CreatePaymentIntentRequestValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<CashOnDeliveryRequestValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<OrderItemDtoValidator>();
             });
             return services;
         }

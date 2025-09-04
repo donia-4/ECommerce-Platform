@@ -45,9 +45,7 @@ namespace Ecommerce.DataAccess.ApplicationContext
         public DbSet<DiscountCategory> DiscountCategories { get; set; }
 
         // Payments
-        public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
-        public DbSet<SavedPaymentMethod> SavedPaymentMethods { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -66,9 +64,7 @@ namespace Ecommerce.DataAccess.ApplicationContext
             modelBuilder.ApplyConfiguration(new DiscountCategoryEntityConfiguration());
             modelBuilder.ApplyConfiguration(new OrderEntityConfiguration());
             modelBuilder.ApplyConfiguration(new OrderItemEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new PaymentMethodEntityConfiguration());
             modelBuilder.ApplyConfiguration(new PaymentTransactionEntityConfiguration());
-            modelBuilder.ApplyConfiguration(new SavedPaymentMethodEntityConfiguration());
         }
     }
 }

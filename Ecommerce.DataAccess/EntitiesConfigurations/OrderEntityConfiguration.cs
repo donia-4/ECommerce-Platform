@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using StackExchange.Redis;
 using Ecommerce.Entities.Models;
+using Ecommerce.Utilities.Enums;
 
 namespace Ecommerce.DataAccess.EntitiesConfigurations
 {
-    public class OrderEntityConfiguration : IEntityTypeConfiguration<Entities.Models.Order>
+    public class OrderEntityConfiguration : IEntityTypeConfiguration<Order>
     {
-        public void Configure(EntityTypeBuilder<Entities.Models.Order> builder)
+        public void Configure(EntityTypeBuilder<Order> builder)
         {
             builder.HasKey(o => o.Id);
 
@@ -54,15 +54,15 @@ namespace Ecommerce.DataAccess.EntitiesConfigurations
 
             builder.HasOne(o => o.AppliedDiscount)
                    .WithMany()
-                   .HasForeignKey(o => o.AppliedDiscountId);
+                   .HasForeignKey(o => o.AppliedDiscountId)
+                   .IsRequired(false); // Discount is optional
 
             builder.HasMany(o => o.Items)
                    .WithOne(oi => oi.Order)
                    .HasForeignKey(oi => oi.OrderId);
 
-            builder.HasOne(o => o.Payment)
-                   .WithOne(p => p.Order)
-                   .HasForeignKey<PaymentTransaction>(p => p.OrderId);
+            builder.HasMany<PaymentTransaction>()
+                   .WithOne(p => p.Order);       
         }
     }
 }

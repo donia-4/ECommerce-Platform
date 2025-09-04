@@ -11,25 +11,20 @@ namespace Ecommerce.Entities.Models
 {
     public class PaymentTransaction
     {
-        [Key]
         public Guid Id { get; set; }
-
-        public Guid OrderId { get; set; }
-        public Guid PaymentMethodId { get; set; }
-
-        [ForeignKey(nameof(OrderId))]
-        public Order Order { get; set; }
-
-        [ForeignKey(nameof(PaymentMethodId))]
-        public PaymentMethod PaymentMethod { get; set; }
+        public Guid BuyerId { get; set; }
 
         public decimal Amount { get; set; }
-        public PaymentTxnStatus Status { get; set; } = PaymentTxnStatus.Pending;
+        public string Currency { get; set; }
 
-        public string? ProviderTxnId { get; set; }
-        public string? RefundReferenceId { get; set; }
+        public PaymentTxnStatus Status { get; set; }
+        public PaymentMethodType Method { get; set; }
 
+        public string? ProviderTxnId { get; set; } // Stripe PaymentIntent Id
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public Guid OrderId { get; set; }
+        public Order Order { get; set; }
     }
+
 
 }
