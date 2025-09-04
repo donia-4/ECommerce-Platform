@@ -58,7 +58,7 @@ Logout()
                 
                 products.map((item ,index)=>{
                     return(
-                        <Link key={index} to={`productDetails/${item.id}`}>{item.name}</Link>
+                        <Link key={index} to={`product/${item.id}`}>{item.name}</Link>
 
                     )
                 })

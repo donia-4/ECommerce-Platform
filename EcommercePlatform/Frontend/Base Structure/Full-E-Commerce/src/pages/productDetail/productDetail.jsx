@@ -1,13 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useContext, useState } from "react";
-import { ProductContext } from "../../context/ProductContext";
 import RatingStars from "../../components/RatingStars/RatingStars";
 import { FaHeart } from "react-icons/fa";
 import "./ProductDetail.css";
-
+/* import {ProductProvider_2} from "../../context/ProductContext";
+ */
 export default function ProductDetail() {
   const { id } = useParams();
-  const { products } = useContext(ProductContext);
+/*   const { products } = useContext(ProductProvider_2);
+ */
+let products=[];
 
   const [color, setColor] = useState("blue");
   const [size, setSize] = useState("M");

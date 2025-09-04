@@ -6,9 +6,8 @@ import Cart from './pages/cart/cart.jsx';
 import Signup from './pages/signup/signup.jsx';
 import Login from './pages/login/login.jsx';
 import ErrorPage from './Common/errorPage/errorPage.jsx';
-import ProductsPage from "./pages/products/product";
-import ProductProvider from "./context/ProductContext";
-import ProductDetail from "./pages/productDetail/productDetail";
+import ProductsPage from "./pages/products/product.jsx";
+import ProductDetail from "./pages/productDetail/productDetail.jsx";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -22,11 +21,11 @@ export default function App() {
       {path:"cart",element:<Cart/>},
       {path:"signup",element:<Signup/>},
       {path:"login",element:<Login/>},
-      {path:"productDetails/:id",element:<Login/>},
+      { path: "product", element: <ProductsPage /> },
+      { path: "product/:id", element: <ProductDetail /> },
       { path: "*", element: <ErrorPage /> },
       
-       { path: "/product", element: <ProductsPage /> },
-        { path: "/product/:id", element: <ProductDetail /> },
+     
 
     ]
     },
@@ -39,4 +38,8 @@ export default function App() {
   
   ],
 );
+
+return <RouterProvider router={router}>
+
+</RouterProvider>
 }

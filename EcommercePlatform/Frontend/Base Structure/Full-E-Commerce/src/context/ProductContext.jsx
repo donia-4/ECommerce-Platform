@@ -1,8 +1,8 @@
 import { createContext } from "react";
 
-export const ProductContext = createContext();
+export const ProductContext_2 = createContext();
 
-export default function ProductProvider({ children }) {
+export default function ProductProvider_2({ children }) {
   const products = [
     {
       id: 1,
@@ -57,8 +57,8 @@ export default function ProductProvider({ children }) {
   ];
 
   return (
-    <ProductContext.Provider value={{ products }}>
+    <ProductContext_2.Provider value={{ products }}>
       {children}
-    </ProductContext.Provider>
+    </ProductContext_2.Provider>
   );
 }

@@ -1,10 +1,9 @@
-import "./css/HomePart3.css";
-import blur from "../../../assets/images/Ellipse 23.png"
-import item from "../../../assets/images/item-img.png"
+import "./css/homePart3.css";
+import item from "../../../assets/images/item-img.png";
 export default function HomePart3()
 {
  
-    return <div className="HomePart3"> 
+    return <div className="HomePart3" id="HomePart3"> 
     <div className="container">
 <div className="text">
  <div class="category-text">Categories</div>

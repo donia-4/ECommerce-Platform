@@ -6,6 +6,7 @@ import HomePart4 from "../components/homeParts/home-part4/homePart4"
 import ServicesComponents from "../Common/servicesComponents/serivcesComponents"
 import { useContext, useEffect } from "react"
 import { UserContext } from "../context/userContext/userContext.jsx"
+import ProductsPage from "./products/product.jsx"
 export default function HomePage()
 {
 
@@ -18,6 +19,7 @@ window.dispatchEvent(new Event('localStorageChange'));
   return () => window.removeEventListener('localStorageChange', UserDataSetting());
     },[])
  
+
 
     return <div className="HomePage pe-2 ps-2"> 
 {/* Slider-Swiper*/}
