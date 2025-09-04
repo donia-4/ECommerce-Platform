@@ -257,19 +257,19 @@ namespace Ecommerce.DataAccess.Services.Auth
             }
 
             // Generate and send OTP
-            _logger.LogInformation("User found with ID: {UserId}. Generating OTP...", user.Id);
-            var otp = await _otpService.GenerateAndStoreOtpAsync(user.Id);
+            //_logger.LogInformation("User found with ID: {UserId}. Generating OTP...", user.Id);
+            //var otp = await _otpService.GenerateAndStoreOtpAsync(user.Id);
 
-            try
-            {
-                await _emailService.SendOtpEmailAsync(user, otp);
-                _logger.LogInformation("OTP sent successfully to user ID: {UserId}", user.Id);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Failed to send OTP email to user ID: {UserId}", user.Id);
-                //return _responseHandler.InternalServerError<ForgetPasswordResponse>("Failed to send OTP.");
-            }
+            //try
+            //{
+            //    await _emailService.SendOtpEmailAsync(user, otp);
+            //    _logger.LogInformation("OTP sent successfully to user ID: {UserId}", user.Id);
+            //}
+            //catch (Exception ex)
+            //{
+            //    _logger.LogError(ex, "Failed to send OTP email to user ID: {UserId}", user.Id);
+            //    //return _responseHandler.InternalServerError<ForgetPasswordResponse>("Failed to send OTP.");
+            //}
             var response = new ForgetPasswordResponse
             {
                 UserId = user.Id
