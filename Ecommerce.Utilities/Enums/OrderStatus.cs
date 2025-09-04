@@ -10,6 +10,7 @@ namespace Ecommerce.Utilities.Enums
     {
         Pending,
         Shipped,
+        Processing,
         Delivered,
         Canceled
     }
