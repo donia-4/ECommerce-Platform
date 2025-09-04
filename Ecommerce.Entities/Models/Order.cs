@@ -22,6 +22,8 @@ namespace Ecommerce.Entities.Models
         public Buyer Buyer { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
 
         public decimal Subtotal { get; set; }
