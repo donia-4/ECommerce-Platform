@@ -20,8 +20,8 @@ export default function CartProvider({ children }) {
     let dataCart = await ViewCart();
     console.log("data", dataCart);
     
-    setCartItem(dataCart.data.items);
-    setCartInfo(dataCart.data);
+    setCartItem(dataCart?.data?.items);
+    setCartInfo(dataCart?.data);
     
     
 

@@ -7,13 +7,15 @@ import { PiShoppingCartLight } from "react-icons/pi";
 import { IoSearchOutline } from "react-icons/io5";
 
 import { MdMenu } from "react-icons/md";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext/userContext";
 import Logout from "../../services/APIs/logout";
+import { ProductContext } from "../../context/productContext/productContext";
 export default function Nav()
 {
 const {isLogin} =useContext(UserContext);  
- 
+ const {products} =useContext(ProductContext)
+ const [openSearch ,setOpenSearch]=useState(false);
     return <nav>
 <div className="top">
 
@@ -46,9 +48,24 @@ Logout()
 
 <div>
     <div className="search">
-        <input type="search" placeholder="What are u looking for?" />
+        <input  onFocus={()=>{setOpenSearch(true)}} 
+        onBlur={()=>{setOpenSearch(false)}}
+        type="search" placeholder="What are u looking for?" />
       <span>  <IoSearchOutline/></span>
-        
+        <div className={`blankSearch ${openSearch?"active":""}`}  >
+
+            {
+                
+                products.map((item ,index)=>{
+                    return(
+                        <Link key={index} to={`productDetails/${item.id}`}>{item.name}</Link>
+
+                    )
+                })
+            }
+
+        </div>
+
         </div>
 <div className="links">
 

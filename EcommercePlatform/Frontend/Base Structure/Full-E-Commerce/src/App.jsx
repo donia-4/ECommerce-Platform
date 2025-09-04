@@ -7,6 +7,7 @@ import Signup from './pages/signup/signup.jsx';
 import Login from './pages/login/login.jsx';
 import Dashboard from './dashboard/dashboardPage.jsx';
 import DashboardLayout from './components/layout/dashboard-layout.jsx';
+import ErrorPage from './Common/errorPage/errorPage.jsx';
 
 
  function App() {
@@ -14,24 +15,20 @@ import DashboardLayout from './components/layout/dashboard-layout.jsx';
     {
       path: "/",
       element: <Layout/>,
+            errorElement:<ErrorPage/>,
+
     children:[
       {path:"",element:<HomePage/>},
       {path:"cart",element:<Cart/>},
       {path:"signup",element:<Signup/>},
-      {path:"login",element:<Login/>}
+      {path:"login",element:<Login/>},
+      {path:"productDetails/:id",element:<Login/>},
+      { path: "*", element: <ErrorPage /> }
+
     ]
     },
 
-    {
-         path:"/dashboard",
-         element:<DashboardLayout/>,
-         children: [
-   {
-     path:"",
-     element :<Dashboard/>,
-   
-   }]
-    }
+  
     ,
 { future: {
     v7_fetcherPersist: true,

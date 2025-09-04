@@ -22,7 +22,12 @@ async   function register()
   "birthDate": inputRef.current["birthDate"].value
 }
 
+console.log(data);
+
+
 let res = await SignUp_Api(data);
+console.log(res);
+
 if(res.statusCode==200)navigate("/");
 else{
 errorRef.current.innerHTML=res.message;
@@ -68,7 +73,7 @@ errorRef.current.style.opacity=1;
 
                 <button type="submit" 
                 
-                onClick={()=>{register()}}
+                onClick={()=>{register(),errorRef.current.style.opacity=0}}
                 className="create-account-btn">Create Account</button>
                 <button className="google-btn"> <span><FcGoogle/></span>  Sign up with Google</button>
             </div>
