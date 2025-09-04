@@ -41,6 +41,14 @@ namespace Ecommerce.DataAccess.Services.ProductService
                 if (category == null)
                     return _responseHandler.BadRequest<ReadProductDto>("Category does not exist");
 
+                if (dto.UploadImages == null || !dto.UploadImages.Any())
+                    return _responseHandler.BadRequest<ReadProductDto>("Image is required");
+
+                if (dto.Stock <= 0)
+                    return _responseHandler.BadRequest<ReadProductDto>("Stock must be greater than 0");
+                if(dto.Price <= 0)
+                    return _responseHandler.BadRequest<ReadProductDto>("Price must be greater than 0");
+
                 var product = new Product
                 {
                     Id = Guid.NewGuid(),
@@ -55,7 +63,10 @@ namespace Ecommerce.DataAccess.Services.ProductService
                 await _context.Products.AddAsync(product);
                 await _context.SaveChangesAsync();
 
-                var imageUrls = await UploadImages(dto.UploadImages, product.Id);
+                // validate + upload images
+                var (imageUrls, errors) = await UploadImages(dto.UploadImages, product.Id, true);
+                if (errors.Any())
+                    return _responseHandler.BadRequest<ReadProductDto>(string.Join("; ", errors));
 
                 var readDto = new ReadProductDto
                 {
@@ -78,6 +89,8 @@ namespace Ecommerce.DataAccess.Services.ProductService
             }
         }
         #endregion
+
+
         #region Update Product
         public async Task<Response<ReadProductDto>> UpdateProductAsync(Guid id, UpdateProductDto dto)
         {
@@ -108,17 +121,31 @@ namespace Ecommerce.DataAccess.Services.ProductService
                 if (!string.IsNullOrWhiteSpace(dto.Description))
                     product.Description = dto.Description;
 
-                if (dto.Price.HasValue)
-                    product.Price = dto.Price.Value;
+       
 
                 if (dto.Stock.HasValue)
-                    product.Stock = dto.Stock.Value;
+                {
+                    if (dto.Stock.Value <= 0)
+                        return _responseHandler.BadRequest<ReadProductDto>("Stock must be greater than 0");
 
-                // Handle Images
+                    product.Stock = dto.Stock.Value;
+                }
+
+                if (dto.Price.HasValue)
+                {
+                    if (dto.Price <= 0)
+                        return _responseHandler.BadRequest<ReadProductDto>("Price must be greater than 0");
+                    product.Price = dto.Price.Value;
+                }
+
+                // Handle Images (optional in update)
                 var imageUrls = product.Images?.Select(i => i.Url).ToList() ?? new List<string>();
                 if (dto.UploadImages != null && dto.UploadImages.Any())
                 {
-                    var newImages = await UploadImages(dto.UploadImages, product.Id);
+                    var (newImages, errors) = await UploadImages(dto.UploadImages, product.Id, false);
+                    if (errors.Any())
+                        return _responseHandler.BadRequest<ReadProductDto>(string.Join("; ", errors));
+
                     imageUrls.AddRange(newImages);
                 }
 
@@ -146,6 +173,7 @@ namespace Ecommerce.DataAccess.Services.ProductService
             }
         }
         #endregion
+
 
         #region Delete Product
         public async Task<Response<bool>> DeleteProductAsync(Guid id)
@@ -237,16 +265,23 @@ namespace Ecommerce.DataAccess.Services.ProductService
         #endregion
 
         #region Helpers
-        private async Task<List<string>> UploadImages(IEnumerable<IFormFile>? files, Guid productId)
+        private async Task<(List<string> urls, List<string> errors)> UploadImages(IEnumerable<IFormFile>? files, Guid productId, bool isImageRequired)
         {
             var urls = new List<string>();
-            if (files == null || !files.Any()) return urls;
+            var errors = new List<string>();
+
+            if (files == null || !files.Any())
+            {
+                if (isImageRequired)
+                    errors.Add("Image is required");
+                return (urls, errors);
+            }
 
             foreach (var file in files)
             {
                 if (!IsValidImage(file, out string error))
                 {
-                    _logger.LogWarning(error);
+                    errors.Add(error);
                     continue;
                 }
 
@@ -264,12 +299,17 @@ namespace Ecommerce.DataAccess.Services.ProductService
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogWarning(ex, "Failed to upload image, continuing...");
+                    errors.Add($"Failed to upload image {file.FileName}: {ex.Message}");
+                    _logger.LogWarning(ex, "Failed to upload image {File}", file.FileName);
                 }
             }
 
-            await _context.SaveChangesAsync();
-            return urls;
+            if (urls.Any())
+                await _context.SaveChangesAsync();
+            else if (isImageRequired)
+                errors.Add("Image is required");
+
+            return (urls, errors);
         }
 
         private ReadProductDto MapToReadDto(Product product)
@@ -291,7 +331,7 @@ namespace Ecommerce.DataAccess.Services.ProductService
         {
             error = string.Empty;
             var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
-            var extension = System.IO.Path.GetExtension(file.FileName).ToLower();
+            var extension = Path.GetExtension(file.FileName).ToLower();
 
             if (!allowedExtensions.Contains(extension))
             {
