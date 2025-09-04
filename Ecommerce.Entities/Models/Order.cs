@@ -22,6 +22,8 @@ namespace Ecommerce.Entities.Models
         public Buyer Buyer { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
 
         public decimal Subtotal { get; set; }
@@ -39,6 +41,6 @@ namespace Ecommerce.Entities.Models
 
         // Relations
         public List<OrderItem> Items { get; set; } = new List<OrderItem>();
-        public PaymentTransaction? Payment { get; set; }
+        public List<PaymentTransaction>? Payments { get; set; }
     }
 }

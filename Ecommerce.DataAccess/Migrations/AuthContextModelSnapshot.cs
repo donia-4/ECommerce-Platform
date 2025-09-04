@@ -208,6 +208,9 @@ namespace Ecommerce.DataAccess.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CartId");
@@ -223,10 +226,20 @@ namespace Ecommerce.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -254,6 +267,11 @@ namespace Ecommerce.DataAccess.Migrations
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -350,6 +368,9 @@ namespace Ecommerce.DataAccess.Migrations
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AppliedDiscountId");
@@ -395,71 +416,70 @@ namespace Ecommerce.DataAccess.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("Ecommerce.Entities.Models.PaymentMethod", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PaymentMethods");
-                });
-
             modelBuilder.Entity("Ecommerce.Entities.Models.PaymentTransaction", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasComment("Unique identifier for payment transaction");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<Guid>("BuyerId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Currency")
+                        .IsRequired()
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
+
+                    b.Property<string>("Method")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("PaymentMethodId")
+                    b.Property<Guid>("OrderId1")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ProviderTxnId")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("RefundReferenceId")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("Payment status: Pending, Success, Failed, Refunded");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId")
-                        .IsUnique();
+                    b.HasIndex("BuyerId");
 
-                    b.HasIndex("PaymentMethodId");
+                    b.HasIndex("CreatedAt");
 
-                    b.ToTable("PaymentTransactions");
+                    b.HasIndex("Method");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("OrderId1");
+
+                    b.HasIndex("ProviderTxnId")
+                        .IsUnique()
+                        .HasFilter("[ProviderTxnId] IS NOT NULL");
+
+                    b.HasIndex("Status");
+
+                    b.ToTable("PaymentTransactions", null, t =>
+                        {
+                            t.HasComment("Stores all payment transactions information");
+                        });
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.Product", b =>
@@ -518,36 +538,6 @@ namespace Ecommerce.DataAccess.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImages");
-                });
-
-            modelBuilder.Entity("Ecommerce.Entities.Models.SavedPaymentMethod", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("BuyerId")
-                        .IsRequired()
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Last4")
-                        .HasMaxLength(4)
-                        .HasColumnType("nvarchar(4)");
-
-                    b.Property<Guid>("PaymentMethodId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("SavedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BuyerId");
-
-                    b.HasIndex("PaymentMethodId");
-
-                    b.ToTable("SavedPaymentMethods");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.Wishlist", b =>
@@ -855,21 +845,19 @@ namespace Ecommerce.DataAccess.Migrations
 
             modelBuilder.Entity("Ecommerce.Entities.Models.PaymentTransaction", b =>
                 {
-                    b.HasOne("Ecommerce.Entities.Models.Order", "Order")
-                        .WithOne("Payment")
-                        .HasForeignKey("Ecommerce.Entities.Models.PaymentTransaction", "OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("Ecommerce.Entities.Models.Order", null)
+                        .WithMany("Payments")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Ecommerce.Entities.Models.PaymentMethod", "PaymentMethod")
-                        .WithMany("Transactions")
-                        .HasForeignKey("PaymentMethodId")
+                    b.HasOne("Ecommerce.Entities.Models.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Order");
-
-                    b.Navigation("PaymentMethod");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.Product", b =>
@@ -892,25 +880,6 @@ namespace Ecommerce.DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Ecommerce.Entities.Models.SavedPaymentMethod", b =>
-                {
-                    b.HasOne("Ecommerce.Entities.Models.Auth.Buyer", "Buyer")
-                        .WithMany()
-                        .HasForeignKey("BuyerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Ecommerce.Entities.Models.PaymentMethod", "PaymentMethod")
-                        .WithMany()
-                        .HasForeignKey("PaymentMethodId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Buyer");
-
-                    b.Navigation("PaymentMethod");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.Wishlist", b =>
@@ -1026,12 +995,7 @@ namespace Ecommerce.DataAccess.Migrations
                 {
                     b.Navigation("Items");
 
-                    b.Navigation("Payment");
-                });
-
-            modelBuilder.Entity("Ecommerce.Entities.Models.PaymentMethod", b =>
-                {
-                    b.Navigation("Transactions");
+                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("Ecommerce.Entities.Models.Product", b =>

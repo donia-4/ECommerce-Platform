@@ -23,5 +23,6 @@ namespace Ecommerce.DataAccess.Services.Auth
         Task<RefreshTokenResponse> RefreshTokenAsync(string refreshToken);
         Task<Response<string>> LogoutAsync(ClaimsPrincipal userClaims);
         Task<Response<string>> ChangePasswordAsync(ClaimsPrincipal user, ChangePasswordRequest request);
+        Task<Response<RegisterResponse>> RegisterBuyerAsync(RegisterBuyerRequest model);
     }
 }

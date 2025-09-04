@@ -24,5 +24,6 @@ namespace Ecommerce.Entities.Models
         public Product Product { get; set; }
         public int Quantity { get; set; }
         public DateTime AddedAt { get; set; } = DateTime.UtcNow;
+        public DateTime? UpdatedAt { get; set; }
     }
 }

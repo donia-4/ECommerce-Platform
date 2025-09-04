@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Ecommerce.Utilities.Enums;
 
-
 namespace Ecommerce.Entities.Models
 {
     public class Discount
@@ -18,6 +17,7 @@ namespace Ecommerce.Entities.Models
         public string Code { get; set; }
 
         public DiscountType Type { get; set; }
+        public DiscountStatus Status { get; set; } = DiscountStatus.Active;
 
         [Range(0, 100)]
         public decimal Value { get; set; }

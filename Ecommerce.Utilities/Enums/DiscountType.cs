@@ -6,5 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Utilities.Enums
 {
-    public enum DiscountType { Percentage, FixedAmount }
+    public enum DiscountType
+    {
+        Percentage,
+        FixedAmount
+    }
 }

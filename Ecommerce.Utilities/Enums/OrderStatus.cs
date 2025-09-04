@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Utilities.Enums
 {
-    public enum OrderStatus 
-    { 
+    public enum OrderStatus
+    {
         Pending,
         Shipped,
+        Processing,
         Delivered,
-        Canceled 
+        Canceled
     }
 }

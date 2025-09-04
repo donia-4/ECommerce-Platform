@@ -24,6 +24,11 @@ namespace Ecommerce.DataAccess.EntitiesConfigurations
                    .HasMaxLength(50)
                    .IsRequired();
 
+            builder.Property(d => d.Status)
+                   .HasConversion<string>()
+                   .HasMaxLength(50)
+                   .IsRequired();
+
             builder.Property(d => d.Value)
                    .HasColumnType("decimal(18,2)");
 
