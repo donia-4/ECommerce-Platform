@@ -1,0 +1,111 @@
+.HomePart4 {
+  padding: var(--pages-padding);
+  overflow: hidden;
+}
+.HomePart4 .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.HomePart4 .container * {
+  overflow: hidden;
+}
+.HomePart4 .container .left {
+  height: 510px;
+  width: 500px;
+  position: relative;
+}
+.HomePart4 .container .left .image {
+  padding-top: 70px;
+  width: 100%;
+  height: 100%;
+}
+.HomePart4 .container .left .image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.HomePart4 .container .right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.HomePart4 .container .right .top {
+  position: relative;
+  width: 500px;
+  height: 250px;
+  padding-left: 100px;
+}
+.HomePart4 .container .right .top img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.HomePart4 .container .down {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.HomePart4 .container .down .image {
+  width: 240px;
+  height: 240px;
+  padding: 20px;
+  position: relative;
+}
+.HomePart4 .container .down .image .img-item {
+  background: transparent;
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  transform: translateY(-50%);
+  width: 180px;
+  height: 180px;
+}
+.HomePart4 .container .down .image .img-item img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.HomePart4 .container .image {
+  overflow: hidden;
+  border-radius: 5px;
+  background-color: var(--shining-black-color);
+}
+
+.HomePart4 .text {
+  position: absolute;
+  color: var(--white-color);
+  z-index: 2;
+  bottom: -30px;
+  left: 0px;
+  width: 400px;
+  font-size: var(--text-size);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+.HomePart4 .text h3 {
+  font-family: var(--Inter-semi-bold);
+}
+.HomePart4 .text .link {
+  border-bottom: 1px solid var(--white-color);
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.HomePart4 .text a {
+  color: var(--white-color);
+  text-decoration: none;
+}
+
+.blur {
+  width: 100%;
+  height: 100%;
+}/*# sourceMappingURL=homePart4.css.map */

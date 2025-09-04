@@ -1,19 +1,25 @@
-import './App.css'
+import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Layout from './components/layout/layout';
+import Layout from "./components/layout/layout";
+import ProductsPage from "./pages/products/product";
+import ProductProvider from "./context/ProductContext";
+import ProductDetail from "./pages/productDetail/productDetail";
 
- function App() {
+export default function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout/>,
+      element: <Layout />,
+      children: [
+        { path: "/product", element: <ProductsPage /> },
+        { path: "/product/:id", element: <ProductDetail /> },
+      ],
     },
-  
   ]);
 
   return (
-  <RouterProvider router={router} />
+    <ProductProvider>
+      <RouterProvider router={router} />
+    </ProductProvider>
   );
 }
-
-export default App;
