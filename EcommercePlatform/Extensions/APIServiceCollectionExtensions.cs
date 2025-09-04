@@ -3,6 +3,7 @@ using System.Threading.RateLimiting;
 
 using Ecommerce.API.Validators;
 using Ecommerce.API.Validators.Discount;
+using Ecommerce.API.Validators.Order;
 using Ecommerce.API.Validators.Stripe;
 using Ecommerce.API.Validators.WishLists;
 using Ecommerce.DataAccess.ApplicationContext;
@@ -133,6 +134,13 @@ namespace Ecommerce.API.Extensions
                 fv.RegisterValidatorsFromAssemblyContaining<CreatePaymentIntentRequestValidator>();
                 fv.RegisterValidatorsFromAssemblyContaining<CashOnDeliveryRequestValidator>();
                 fv.RegisterValidatorsFromAssemblyContaining<OrderItemDtoValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<AdminCreateOrderRequestValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<CreateOrderRequestValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<OrderItemRequestValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<UpdateOrderStatusRequestValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<OrderQueryDtoValidator>();
+
+
             });
             return services;
         }

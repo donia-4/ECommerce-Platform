@@ -20,6 +20,7 @@ using System.Net;
 using System.Net.Mail;
 using Stripe;
 using Ecommerce.DataAccess.Services.Stripe;
+using Ecommerce.DataAccess.Services.Order;
 
 namespace Ecommerce.DataAccess.Extensions
 {
@@ -48,6 +49,7 @@ namespace Ecommerce.DataAccess.Extensions
             services.AddScoped<ICartService, CartService>();
             services.AddScoped<IStripeService, StripeService>();
             services.AddScoped<IProductBuyerService, ProductBuyerService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             return services;
         }
