@@ -330,12 +330,12 @@ namespace Ecommerce.DataAccess.Services.ProductService
         private bool IsValidImage(IFormFile file, out string error)
         {
             error = string.Empty;
-            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".jfif" };
             var extension = Path.GetExtension(file.FileName).ToLower();
 
             if (!allowedExtensions.Contains(extension))
             {
-                error = $"File {file.FileName} is invalid, must be jpg/jpeg/png";
+                error = $"File {file.FileName} is invalid, must be jpg/jpeg/png/jfif";
                 return false;
             }
 
