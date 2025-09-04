@@ -1,0 +1,88 @@
+.Part2-Dashboard {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  gap: 25px;
+  /* Text Div */
+  /* Product Title */
+  /* Price Text */
+  /* Price Value */
+  /* Sale Text */
+  /* Sale Value */
+  /* Day Text */
+  /* Icon Div */
+  /* Icon Styling */
+}
+.Part2-Dashboard .card-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  -webkit-box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Equivalent to Tailwind's shadow-lg */
+  max-width: 28rem;
+  width: 250px;
+  height: 150px;
+}
+.Part2-Dashboard .text-section {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1; /* Equivalent to Tailwind's flex-grow */
+  margin-right: 1rem; /* Equivalent to Tailwind's mr-4 */
+}
+.Part2-Dashboard .product-title {
+  font-size: 1.125rem; /* Equivalent to Tailwind's text-lg */
+  font-weight: 600; /* Equivalent to Tailwind's font-semibold */
+  color: #374151; /* Equivalent to Tailwind's text-gray-800 */
+  margin-bottom: 0.25rem; /* Equivalent to Tailwind's mb-1 */
+}
+.Part2-Dashboard .price-text {
+  font-size: 0.875rem; /* Equivalent to Tailwind's text-sm */
+  color: #4b5563; /* Equivalent to Tailwind's text-gray-600 */
+  margin-bottom: 0.125rem; /* Equivalent to Tailwind's mb-0.5 */
+}
+.Part2-Dashboard .price-value {
+  font-weight: 700; /* Equivalent to Tailwind's font-bold */
+  color: #000000; /* Equivalent to Tailwind's text-black */
+}
+.Part2-Dashboard .sale-text {
+  font-size: 0.875rem; /* Equivalent to Tailwind's text-sm */
+  color: #22c55e; /* Equivalent to Tailwind's text-green-600 */
+  margin-bottom: 0.125rem; /* Equivalent to Tailwind's mb-0.5 */
+}
+.Part2-Dashboard .sale-value {
+  font-weight: 500; /* Equivalent to Tailwind's font-medium */
+}
+.Part2-Dashboard .day-text {
+  font-size: 0.75rem; /* Equivalent to Tailwind's text-xs */
+  color: #6b7280; /* Equivalent to Tailwind's text-gray-500 */
+}
+.Part2-Dashboard .icon-section {
+  -ms-flex-negative: 0;
+      flex-shrink: 0; /* Equivalent to Tailwind's flex-shrink-0 */
+}
+.Part2-Dashboard .icon-section .fas {
+  color: hsl(217, 91%, 60%); /* Equivalent to Tailwind's text-blue-500 */
+  font-size: 2.25rem; /* Equivalent to Tailwind's text-3xl */
+  padding: 0.75rem; /* Equivalent to Tailwind's p-3 */
+  background-color: #8884d8; /* Equivalent to Tailwind's bg-blue-100 */
+  border-radius: 9999px; /* Equivalent to Tailwind's rounded-full */
+  -webkit-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Equivalent to Tailwind's shadow-md */
+  width: 50px;
+  height: 50px;
+}

@@ -7,8 +7,12 @@ import { PiShoppingCartLight } from "react-icons/pi";
 import { IoSearchOutline } from "react-icons/io5";
 
 import { MdMenu } from "react-icons/md";
+import { useContext } from "react";
+import { UserContext } from "../../context/userContext/userContext";
+import Logout from "../../services/APIs/logout";
 export default function Nav()
 {
+const {isLogin} =useContext(UserContext);  
  
     return <nav>
 <div className="top">
@@ -28,7 +32,15 @@ export default function Nav()
    <NavLink to="">Home</NavLink>
    <NavLink to="/contact">Contact</NavLink>
    <NavLink to="/about">About</NavLink>
-   <NavLink to="/signup">Sign Up   </NavLink>
+      {
+isLogin()?
+<NavLink  onClick={()=>{ console.log(
+Logout()
+);
+ }} to="/login">Logout   </NavLink>
+       :
+<NavLink  to="/signup">Sign Up   </NavLink>
+    }
     
 </div>
 
@@ -39,8 +51,20 @@ export default function Nav()
         
         </div>
 <div className="links">
-    <Link to="/whishlist" className="wishList"><AiOutlineHeart/></Link>
+
+    {
+        isLogin()?
+        <>
+         <Link to="/whishlist"  className="wishList"><AiOutlineHeart/></Link>
     <Link to="/cart" className="Cart"><PiShoppingCartLight/></Link>
+    </>
+    :
+    <>
+    <Link to="/signup" className="wishList"><AiOutlineHeart/></Link>
+    <Link to="/signup" className="Cart"><PiShoppingCartLight/></Link>  
+    </>   
+    }
+   
     <div class="nav-item dropdown" style={{position:"unset",display:"none"}}>
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 <MdMenu style={{fontSize:"20px"}}/>
@@ -50,7 +74,13 @@ export default function Nav()
             <NavLink className="dropdown-item" to="">Home</NavLink>
    <NavLink className="dropdown-item" to="/contact">Contact</NavLink>
    <NavLink className="dropdown-item" to="/about">About</NavLink>
-   <NavLink className="dropdown-item" to="/signup">Sign Up   </NavLink>
+   {
+isLogin()?
+<NavLink className="dropdown-item" onClick={()=>{Logout()}} to="/login">Logout   </NavLink>
+       :
+<NavLink className="dropdown-item" to="/signup">Sign Up   </NavLink>
+    }
+
         </div>
       </div>
 </div>

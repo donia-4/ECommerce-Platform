@@ -4,30 +4,20 @@ import HomePart2 from "../components/homeParts/homePart2/homePart2"
 import HomePart3 from "../components/homeParts/home-part3/homePart3"
 import HomePart4 from "../components/homeParts/home-part4/homePart4"
 import ServicesComponents from "../Common/servicesComponents/serivcesComponents"
-import {ProductContext} from "../context/productContext/productContext"
 import { useContext, useEffect } from "react"
-import SignUp_Api from "../services/APIs/signup.js";
-import GenerateToken from "../services/APIs/generateToken.js"
-import Login_Api from "../services/APIs/login.js"
-import ReGenerateToken from "../services/APIs/reGenerateToken.js"
+import { UserContext } from "../context/userContext/userContext.jsx"
 export default function HomePage()
 {
 
-
-
-
+    const{UserDataSetting}=useContext(UserContext);
+window.dispatchEvent(new Event('localStorageChange'));
     useEffect(()=>{
 
-        if(localStorage.getItem("userData")!=null ||localStorage.getItem("userData")!=undefined)
-        {
-            let userData= JSON.parse(localStorage.getItem("userData")) ;
-/*             console.log({"idToken":tokenData.accessToken});
- */            
 
-        
-        }
+  window.addEventListener('localStorageChange',()=>{window.location.reload()} );
+  return () => window.removeEventListener('localStorageChange', UserDataSetting());
     },[])
-
+ 
 
     return <div className="HomePage pe-2 ps-2"> 
 {/* Slider-Swiper*/}

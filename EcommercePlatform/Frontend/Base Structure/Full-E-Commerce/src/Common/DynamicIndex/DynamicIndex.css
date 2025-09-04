@@ -27,3 +27,20 @@
     font-weight: bolder;
     margin-left: 5px;
 }
+
+@media (max-width:340px) {
+    
+
+    .DynamicIndex
+    {
+        font-size: 12px !important;
+    }
+}
+@media (max-width:240px) {
+    
+
+    .DynamicIndex
+    {
+        font-size: 8px !important;
+    }
+}

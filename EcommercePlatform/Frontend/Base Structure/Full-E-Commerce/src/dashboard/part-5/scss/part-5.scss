@@ -1,0 +1,73 @@
+@use "../../../common_scss/commonScss.scss" as *;
+
+
+.Part5
+{
+            background-color: white;
+    height: 100%;
+    border-radius:10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.116);
+        padding:  20px;
+width:$left_Width_Container;    
+
+
+h5{
+    margin-bottom: 25px;
+}
+
+
+ul{
+margin: 0px;
+padding: 0px;
+
+            li{
+                @include between-center;
+                list-style: none;
+                margin-bottom:10px;
+
+
+                
+.left
+{
+
+                
+                
+                @include Start-center;
+                gap: 18px;
+color: rgba(0, 0, 0, 0.715);
+                .icon-feedback
+                {
+padding:8px 10px;
+font-size: 13px;
+background-color: black;  
+border-radius: 10px;
+color: white;
+
+}
+                .header-feedback
+                {
+                    @include Start-center;
+                    p{
+                        
+                        margin: 0px;
+                        font-weight:500;
+                        font-size: 16px;
+
+                    }
+                }
+
+                .data
+                {
+                    p
+                    {
+                        margin:1px 0px;
+                        font-size: 13px;
+                    }
+                }
+            }
+            }
+
+        }
+
+    
+}

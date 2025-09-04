@@ -1,6 +1,6 @@
 
 
-export default async function CreateAPi_Function (initialUrl,intialData){
+export default async function CreateAPi_Function (initialUrl,headersData,intialData){
 
  try {
 
@@ -8,7 +8,7 @@ export default async function CreateAPi_Function (initialUrl,intialData){
 
         method:"POST",
         body:JSON.stringify(intialData),
-        headers:{"Content-Type":"application/json"} 
+        headers:headersData
     })
     
 

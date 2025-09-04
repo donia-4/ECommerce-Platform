@@ -7,7 +7,10 @@ export default async function GenerateToken(intialData)
 { 
 
      let res =await CreateAPi_Function(import.meta.env.VITE_TOKEN_API
-,intialData);
+,{"Content-Type":"application/json"}
+,intialData
+
+);
      return res;
 
 }

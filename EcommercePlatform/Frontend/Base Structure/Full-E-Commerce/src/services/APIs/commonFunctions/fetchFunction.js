@@ -1,17 +1,16 @@
 
 
-export default async function FetchApi_Function (initialUrl){
+export default async function FetchApi_Function (initialUrl,headersData){
     try
     {
 let res=await fetch(initialUrl,{
 
-      headers:{"Content-Type":"application/json"} 
+      headers:headersData
 
 });
 
 if(!res.ok)
 {
-    setFetchError(true);
       throw new Error (`Fetch HTTP error!${res.status} `);
 }
 

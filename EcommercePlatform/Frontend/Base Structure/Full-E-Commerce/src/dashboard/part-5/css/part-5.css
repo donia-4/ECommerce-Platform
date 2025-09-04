@@ -1,0 +1,69 @@
+.Part5 {
+  background-color: white;
+  height: 100%;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.116);
+          box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.116);
+  padding: 20px;
+  width: 450px;
+}
+.Part5 h5 {
+  margin-bottom: 25px;
+}
+.Part5 ul {
+  margin: 0px;
+  padding: 0px;
+}
+.Part5 ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  list-style: none;
+  margin-bottom: 10px;
+}
+.Part5 ul li .left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 18px;
+  color: rgba(0, 0, 0, 0.715);
+}
+.Part5 ul li .left .icon-feedback {
+  padding: 8px 10px;
+  font-size: 13px;
+  background-color: black;
+  border-radius: 10px;
+  color: white;
+}
+.Part5 ul li .left .header-feedback {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.Part5 ul li .left .header-feedback p {
+  margin: 0px;
+  font-weight: 500;
+  font-size: 16px;
+}
+.Part5 ul li .left .data p {
+  margin: 1px 0px;
+  font-size: 13px;
+}

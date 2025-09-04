@@ -1,0 +1,94 @@
+@use "../../common_scss/commonScss.scss"as *;
+
+
+
+   .fixed-bg
+    {
+        width: 100vw;
+        position: fixed;
+        top: 0;
+        left: 0px;
+        height: 100vh;
+        margin-top: 20px;
+                @include around-start ; 
+
+
+
+    
+.DashboardPage
+{
+overflow-y: auto;
+overflow-x: hidden;
+          min-height: 0;
+          height: 90%;
+        padding: 20px;
+
+        >*
+        {
+                margin: 0px;
+                margin-bottom: 50px;
+                
+
+        }
+.container-Dashboard
+{
+    height: 404px;
+    @include  center-start;
+gap:25px;
+width: fit-content;
+overflow: hidden;
+}
+
+
+
+@mixin ScrollbarCommon()
+{
+
+
+    visibility:hidden;
+
+transition: 0.5s;
+
+
+}
+&::-webkit-scrollbar
+{
+            width: 9px;
+        background-color: transparent;
+        @include ScrollbarCommon;
+
+
+}
+
+&::-webkit-scrollbar-thumb
+{
+    background-color: rgba(128, 128, 128, 0.3);
+    border-radius:10px;
+    @include ScrollbarCommon;
+
+}
+
+&:hover{
+&::-webkit-scrollbar,&::-webkit-scrollbar-thumb
+{
+
+    visibility: visible;
+}
+
+    }
+}
+
+
+    }
+
+ 
+
+
+
+
+
+
+
+
+
+

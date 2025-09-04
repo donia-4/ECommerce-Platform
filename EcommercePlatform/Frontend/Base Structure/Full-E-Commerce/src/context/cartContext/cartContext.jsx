@@ -1,96 +1,104 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import ViewCart from "../../services/APIs/viewCart";
+import UpdateQunatityCart from "../../services/APIs/update_Quantity_Cart";
+import ProductById from "../../services/APIs/get_Product_Id";
+import DeleteCart from "../../services/APIs/deleteCart";
 
 export const CartContext = createContext();
 
 export default function CartProvider({ children }) {
 
- const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);   
+ 
   
-  const [cart,setCart]=useState([
-  {
-    "id": 1,
-    "name": "ASUS FHD Gaming Laptop",
-    "price": 700,
-    "rating": 5,
-    "reviews": 150,
-    "image": "https://m.media-amazon.com/images/I/71WuDXpTAlL._AC_SL1500_.jpg",
-    "stock": 50,
-    "count": 1
-  },
-  {
-    "id": 2,
-    "name": "Apple MacBook Pro",
-    "price": 1200,
-    "rating": 4,
-    "reviews": 250,
-    "image": "https://m.media-amazon.com/images/I/71WuDXpTAlL._AC_SL1500_.jpg",
-    "stock": 30,
-    "count": 1
-  },
-  {
-    "id": 3,
-    "name": "Dell XPS 13",
-    "price": 950,
-    "rating": 5,
-    "reviews": 180,
-    "image": "https://m.media-amazon.com/images/I/71WuDXpTAlL._AC_SL1500_.jpg",
-    "stock": 75,
-    "count": 1
-  },
-  {
-    "id": 4,
-    "name": "HP Spectre x360",
-    "price": 1100,
-    "rating": 4,
-    "reviews": 120,
-    "image": "https://m.media-amazon.com/images/I/71WuDXpTAlL._AC_SL1500_.jpg",
-    "stock": 40,
-    "count": 1
-  },
-  {
-    "id": 5,
-    "name": "Lenovo ThinkPad X1 Carbon",
-    "price": 1300,
-    "rating": 5,
-    "reviews": 210,
-    "image": "https://m.media-amazon.com/images/I/71WuDXpTAlL._AC_SL1500_.jpg",
-    "stock": 60,
-    "count": 1
-  }
-]);
-  
+  const [cartItems,setCartItem]=useState([]);
+  const [cartInfo,setCartInfo]=useState([]);
 
- function Quantity_Function( {type,payload})
+
+   useEffect(()=>{
+
+ (async()=>{
+    let dataCart = await ViewCart();
+    console.log("data", dataCart);
+    
+    setCartItem(dataCart.data.items);
+    setCartInfo(dataCart.data);
+    
+    
+
+  
+ })()
+
+   },[]) 
+
+
+async function Quantity_Function( {type,payload})
     {
+
       
+      console.log(payload);
+      
+   let res= await ProductById(payload.productId);
+   console.log(res);
+   
+   let stock=res.data.stock;
+   
+   let affected =false;
+
+
+
  switch(type)
     {
          
-        case "add": ( cart[payload.index].count < payload.stock) && setCart(()=>{cart[payload.index].count++; return [...cart]}) ;
+        case "add": ( payload.quantity < stock) && (
+          
+          affected=true,
+          
+          setCartItem(()=>{
+           cartItems[payload.index].quantity= payload.quantity+1; return [...cartItems]}) );
         break;
-        case "minus": ( cart[payload.index].count > 1) && setCart(()=>{cart[payload.index].count-- ; 
-            return [...cart];})  ;
+        case "minus": ( cartItems[payload.index].quantity > 1) &&( affected=true, 
+          setCartItem(()=>{cartItems[payload.index].quantity= payload.quantity-1 ; 
+            return [...cartItems];})  );
                break;
 
     } 
 
+    if(affected)
+    {
+      let res =await UpdateQunatityCart({
+  "cartItemId":payload.cartItemId,
+  "quantity":  payload.quantity+1
+});
+    let dataCart = await ViewCart();
+      
+    setCartInfo(dataCart.data);
+
+
+    }
+
     }
 
 
-    function Delete_From_Cart(index)
+  async  function Delete_From_Cart(index ,cartId)
     {
-cart.splice(index,1);
-setCart([...cart])
+      console.log(index);
+      console.log(cartId);
+      
+ cartItems.splice(index,1);
+  setCartItem([...cartItems]);
+ console.log(cartItems);
+
+let res = await DeleteCart(cartId);
+console.log(res); 
+
+``
         
     }
 
 
 
   return (
-    <CartContext.Provider value={{ cart,Quantity_Function ,Delete_From_Cart,show,handleClose,handleShow}}>
+    <CartContext.Provider value={{cartInfo, cartItems,Quantity_Function ,Delete_From_Cart}}>
       {children}
     </CartContext.Provider>
   );

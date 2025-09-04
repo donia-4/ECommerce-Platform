@@ -1,8 +1,8 @@
 @use "../../../assets/common_scss/commonScss.scss" as *;
-.Cart
+.Cart-container
 {
     /* style.css */
-
+padding: 30px;
     .container 
 {
     @include center-start;
@@ -228,14 +228,107 @@ padding: 8px 8px;
 
 
 @media (max-width:940px) {
-    .container
+   .Cart-container  .container
     {
         flex-direction: column;
         align-items: end !important;
     }
-    .Cart .cart-wrapper
+   .Cart-container .cart-wrapper
     {
         width: 100% !important;
 
     }
 }
+
+
+@media (min-width:100px) {
+    .container, .container-sm {
+        max-width: 99% !important;
+    }
+   
+}
+
+
+
+@media (max-width:590px) {
+.Cart-container
+{
+    padding:30px 5px;
+}
+ .Cart-container .cart-table td,.Cart-container .quantity-input
+    {
+        font-size: 9px;
+    }
+
+    .Cart-container .quantity-control
+    {
+        width: 42px;
+    }
+
+    .Cart-container .quantity-input
+    {
+        width: 22px;    
+    }
+.Cart-container .cart-table td
+    {
+padding: 8px 0px;
+width: 100px !important;
+    }
+
+    .Cart-container .cart-table th 
+    {
+        padding: 8px 0px;
+    }
+   
+
+}
+@media (max-width:405px) {
+
+.Cart-container .cart-table thead tr,.Cart-container .cart-table td 
+{
+    font-size: 9px !important ;
+}
+ .Cart-container .quantity-control
+    {
+        width: 35px;
+    }
+
+    .Cart-container .quantity-input
+    {
+        width: 20px;    
+    }
+     .container, .container-sm {
+        max-width: 100% !important;
+    }
+.Cart-container .remove-icon
+{
+    width: 10px !important;
+    height: 10px !important;
+    padding :5px !important; 
+}
+}
+
+
+@media (max-width:269px) {
+ .Cart-container .quantity-control
+    {
+        width: 25px;
+height: 25px;
+    }
+
+    .Cart-container .quantity-input
+    {
+        width: 15px;    
+        height: 10px;
+        font-size: 8px;
+    }
+.Cart-container .cart-table thead tr, .Cart-container .cart-table td 
+   {
+        font-size: 5px !important;
+    }
+.Cart-container
+{
+    padding: 30px 2px;
+}
+}
+

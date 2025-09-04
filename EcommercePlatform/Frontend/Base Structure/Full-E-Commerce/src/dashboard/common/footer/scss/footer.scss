@@ -1,0 +1,7 @@
+@use "../../../../common_scss/commonScss.scss" as * ;
+footer
+{
+    @include between-center;
+    opacity: 0.6;
+    margin: 0px !important;
+}

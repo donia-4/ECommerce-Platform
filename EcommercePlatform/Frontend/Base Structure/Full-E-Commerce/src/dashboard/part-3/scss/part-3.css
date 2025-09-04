@@ -1,0 +1,17 @@
+.Part3-Dashboard {
+  background: url("../../../../../public/images/bg_2.jpg") no-repeat center;
+  background-size: cover;
+  width: 450px;
+  height: 100%;
+  border-radius: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: end;
+  padding: 40px;
+}
+.Part3-Dashboard .text {
+  color: white;
+}
+.Part3-Dashboard .text p {
+  width: 320px;
+}/*# sourceMappingURL=part-3.css.map */
