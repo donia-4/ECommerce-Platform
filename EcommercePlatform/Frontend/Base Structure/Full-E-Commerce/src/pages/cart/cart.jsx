@@ -9,10 +9,20 @@ import RedButton from "../../Common/redButton/redButton";
 import CartProduct from "../../Common/cartProduct/cartProduct";
 import empty from "../../assets/images/icons/icons8-empty-100.png";
 import { Link } from "react-router-dom";
+import AddToOrder from "../../services/APIs/addOrder";
 export default function Cart()
 {
-  const {cartItems,cartInfo } = useContext(CartContext);
+  const {cartItems,cartInfo,setCart_Info_State } = useContext(CartContext);
 
+
+  async function processOrder()
+  {
+    let res =await AddToOrder({});
+setCart_Info_State();
+    console.log("order",res);
+    
+
+  }
 
   
 
@@ -83,7 +93,7 @@ index={index}
 
     <div className="coupoun">
         <input type="text" placeholder="Coupoun"  />
-        <RedButton text="Apply Coupoun"/>
+        <RedButton text="Apply Coupoun" btn_Function={processOrder}/>
     </div>
     </div>
 

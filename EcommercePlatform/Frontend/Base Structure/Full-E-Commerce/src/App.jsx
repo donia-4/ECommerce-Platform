@@ -5,8 +5,6 @@ import HomePage from './pages/homePage.jsx';
 import Cart from './pages/cart/cart.jsx';
 import Signup from './pages/signup/signup.jsx';
 import Login from './pages/login/login.jsx';
-import Dashboard from './dashboard/dashboardPage.jsx';
-import DashboardLayout from './components/layout/dashboard-layout.jsx';
 import ErrorPage from './Common/errorPage/errorPage.jsx';
 
 

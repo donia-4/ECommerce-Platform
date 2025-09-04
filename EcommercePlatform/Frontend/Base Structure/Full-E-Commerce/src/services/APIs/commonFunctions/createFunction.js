@@ -13,9 +13,9 @@ export default async function CreateAPi_Function (initialUrl,headersData,intialD
     
 
 // Http  level error (status code) 
-  /*   if(!res.ok) {
-        throw new Error (`Create HTTP error!${res.status} `);
-    }  */
+     if(!res.ok) {
+            return "Please enter your data correctly ";
+    }  
 
 
 const contentType = res.headers.get("content-type");
@@ -26,6 +26,7 @@ const contentType = res.headers.get("content-type");
         }       }
         catch(error)
         {
- throw new Error (error.message);
-        }
+            return "A network error occurred";
+/*  throw new Error (error.message);
+ */        }
 }

@@ -13,20 +13,28 @@ export default function CartProvider({ children }) {
   const [cartItems,setCartItem]=useState([]);
   const [cartInfo,setCartInfo]=useState([]);
 
-
-   useEffect(()=>{
-
- (async()=>{
+async function setCart_All_State()
+{
     let dataCart = await ViewCart();
     console.log("data", dataCart);
     
     setCartItem(dataCart?.data?.items);
     setCartInfo(dataCart?.data);
-    
-    
 
-  
- })()
+}
+async function setCart_Info_State()
+{
+    let dataCart = await ViewCart();
+    console.log("data", dataCart);
+    
+    setCartInfo(dataCart?.data);
+
+}
+
+
+
+   useEffect(()=>{
+ setCart_All_State();
 
    },[]) 
 
@@ -69,9 +77,8 @@ async function Quantity_Function( {type,payload})
   "cartItemId":payload.cartItemId,
   "quantity":  payload.quantity+1
 });
-    let dataCart = await ViewCart();
-      
-    setCartInfo(dataCart.data);
+
+setCart_Info_State();
 
 
     }
@@ -98,7 +105,7 @@ console.log(res);
 
 
   return (
-    <CartContext.Provider value={{cartInfo, cartItems,Quantity_Function ,Delete_From_Cart}}>
+    <CartContext.Provider value={{cartInfo, cartItems,Quantity_Function ,Delete_From_Cart,setCart_Info_State}}>
       {children}
     </CartContext.Provider>
   );

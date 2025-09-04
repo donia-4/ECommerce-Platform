@@ -22,15 +22,16 @@ async   function register()
   "birthDate": inputRef.current["birthDate"].value
 }
 
-console.log(data);
 
 
 let res = await SignUp_Api(data);
 console.log(res);
 
+console.log(res.statusCode==200);
+
 if(res.statusCode==200)navigate("/");
 else{
-errorRef.current.innerHTML=res.message;
+errorRef.current.innerHTML=res;   
 errorRef.current.style.opacity=1;
 }
 
@@ -75,11 +76,11 @@ errorRef.current.style.opacity=1;
                 
                 onClick={()=>{register(),errorRef.current.style.opacity=0}}
                 className="create-account-btn">Create Account</button>
-                <button className="google-btn"> <span><FcGoogle/></span>  Sign up with Google</button>
+                <button  className="google-btn"> <span><FcGoogle/></span>  Sign up with Google</button>
             </div>
             <p className="login-link">Already have an account? <Link to={"/login"}>Log in</Link></p>
 
-            <p ref={errorRef} className="error" style={{color:"red",marginTop:"20px",fontSize:"13px",opacity:0}}>Invalid username or password</p>
+            <p ref={errorRef} className="error" style={{color:"red",marginTop:"20px",fontSize:"13px",opacity:0}}>Please </p>
         </div>
     </main>
     </div>

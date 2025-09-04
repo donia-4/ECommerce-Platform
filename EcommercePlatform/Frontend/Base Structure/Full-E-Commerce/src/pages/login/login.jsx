@@ -64,7 +64,7 @@ else{
                 <div className="add" style={{display:"flex",justifyContent:"space-between",fontSize:"10px"}}>
 
                 <Link   to={"/signup"}>Create Account</Link>
-                    <a href="#" className="forgot-password">Forget Password?</a>
+                    <a href="#"  className="forgot-password">Forget Password?</a>
 
     
                 </div>
