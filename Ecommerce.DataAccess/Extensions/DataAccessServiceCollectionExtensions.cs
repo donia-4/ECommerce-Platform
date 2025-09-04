@@ -7,6 +7,7 @@ using Ecommerce.DataAccess.Services.Email;
 using Ecommerce.DataAccess.Services.ImageUploading;
 using Ecommerce.DataAccess.Services.OAuth;
 using Ecommerce.DataAccess.Services.OTP;
+using Ecommerce.DataAccess.Services.ProductBuyer;
 using Ecommerce.DataAccess.Services.ProductService;
 using Ecommerce.DataAccess.Services.Token;
 using Ecommerce.DataAccess.Services.Wishlist;
@@ -43,6 +44,7 @@ namespace Ecommerce.DataAccess.Extensions
             services.AddScoped<IWishlistService, WishlistService>();    
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICartService, CartService>();
+            services.AddScoped<IProductBuyerService, ProductBuyerService>();
 
 
             return services;
