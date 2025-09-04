@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecommerce.Utilities.Enums
+namespace Ecommerce.Entities.DTO.Stripe
 {
-    public enum DiscountType
+    public class CreatePaymentIntentResponse
     {
-        Percentage,
-        FixedAmount
+        public string ClientSecret { get; set; }
     }
 }

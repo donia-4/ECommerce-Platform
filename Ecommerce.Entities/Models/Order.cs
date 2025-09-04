@@ -39,6 +39,6 @@ namespace Ecommerce.Entities.Models
 
         // Relations
         public List<OrderItem> Items { get; set; } = new List<OrderItem>();
-        public PaymentTransaction? Payment { get; set; }
+        public List<PaymentTransaction>? Payments { get; set; }
     }
 }

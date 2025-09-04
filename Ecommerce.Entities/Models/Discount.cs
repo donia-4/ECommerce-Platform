@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Ecommerce.Utilities.Enums;
 
-
 namespace Ecommerce.Entities.Models
 {
     public class Discount

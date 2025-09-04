@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Ecommerce.DataAccess.ApplicationContext;
 using Ecommerce.Entities.DTO.Discount;
 using Ecommerce.Entities.Shared.Bases;
-using Ecommerce.Utilities.Enums;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Ecommerce.Entities.Shared;
+using Ecommerce.Utilities.Enums;
 
 namespace Ecommerce.DataAccess.Services.Discount
 {

@@ -6,5 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Utilities.Enums
 {
-    public enum PaymentTxnStatus { Pending, Paid, Failed, Refunded, Canceled }
+    public enum PaymentTxnStatus
+    {
+        Pending,
+        Success,
+        Failed
+    }
 }

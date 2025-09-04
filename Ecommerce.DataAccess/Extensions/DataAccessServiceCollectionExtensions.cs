@@ -17,6 +17,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using System.Net.Mail;
+using Stripe;
+using Ecommerce.DataAccess.Services.Stripe;
 
 namespace Ecommerce.DataAccess.Extensions
 {
@@ -39,10 +41,11 @@ namespace Ecommerce.DataAccess.Extensions
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IAuthGoogleService, AuthGoogleService>();
             services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<IDiscountService, DiscountService>();
-            services.AddScoped<IWishlistService, WishlistService>();    
-            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IDiscountService, Services.Discount.DiscountService>();
+            services.AddScoped<IWishlistService, WishlistService>();
+            services.AddScoped<IProductService, Services.ProductService.ProductService>();
             services.AddScoped<ICartService, CartService>();
+            services.AddScoped<IStripeService, StripeService>();
 
 
             return services;
@@ -62,5 +65,14 @@ namespace Ecommerce.DataAccess.Extensions
 
             return services;
         }
+        public static IServiceCollection AddStripeConfiguration(this IServiceCollection services, IConfiguration configuration)
+        {
+            var stripeSettings = configuration.GetSection("Stripe").Get<StripeSettings>();
+
+            services.Configure<StripeSettings>(configuration.GetSection("Stripe"));
+            StripeConfiguration.ApiKey = stripeSettings.SecretKey;
+            return services;
+        }
+
     }
 }
