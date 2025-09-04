@@ -7,10 +7,10 @@ export default async function AddTOCart(intialData)
 
      let res =await CreateAPi_Function(import.meta.env.VITE_ADD_TO_CART_API,{"Content-Type":"application/json",
      'Authorization': `Bearer ${Token}`},
-     intialData
+     intialData);
 
-     );
       if(res.statusCode===401){
+
           console.log("viewCart Retoken");
           
 let retoken= await ReToken();
@@ -18,8 +18,11 @@ if (!retoken) return [];
 
 res =await FetchApi_Function(import.meta.env.VITE_VIEW_CART_API,             
 {"Content-Type":"application/json",
-     'Authorization': `Bearer ${retoken}`});
-     }
+'Authorization': `Bearer ${retoken}`}
+);
+     
+}
+
      return res;
 }
 

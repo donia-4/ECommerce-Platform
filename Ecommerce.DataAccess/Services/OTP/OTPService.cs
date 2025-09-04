@@ -22,7 +22,7 @@ namespace Ecommerce.DataAccess.Services.OTP
         {
             var otp = GenerateOtp();
 
-            bool success = await _redis.StringSetAsync($"otp:{userId}", otp, TimeSpan.FromMinutes(5));
+            bool success = await _redis.StringSetAsync($"otp:{userId}", otp, TimeSpan.FromMinutes(30));
             if (success)
                 _logger.LogInformation("OTP generated and stored for UserId: {UserId}. Expiry: 5 Minutes", userId);
             else
