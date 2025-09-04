@@ -1,12 +1,13 @@
 
 import CreateAPi_Function from "./commonFunctions/createFunction.js";
 import { ReToken,getToken } from "./commonFunctions/TokenFunction.js";
-export default async function AddTOCart(intialData)
+export default async function ApplyDiscount(intialData)
 {
-     let Token =getToken();
-
+ let Auth= "Bearer"+import.meta.env.VITE_ADMIN_TOKEN;
+ console.log(Auth);
+ 
      let res =await CreateAPi_Function(import.meta.env.VITE_ADD_TO_CART_API,{"Content-Type":"application/json",
-     'Authorization': `Bearer ${Token}`},
+     'Authorization': Auth},
      intialData
 
      );
