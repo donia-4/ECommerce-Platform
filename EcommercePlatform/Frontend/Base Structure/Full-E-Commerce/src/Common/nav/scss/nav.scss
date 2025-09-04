@@ -1,4 +1,310 @@
+@use "../../../assets/common_scss/commonScss.scss" as *;
+
 nav
 {
+
+    color: var(--white-color);
+    .top
+    {
+        background-color: var(--black-color);
+        font-size: 12px;
+        height: 40px;
+font-weight: 400;
+@include Centering;
+position: relative;
+
+p
+{
+        @include Centering;
+        gap: 10px;
+margin: 0px;
+    &:last-child
+    {
+        position: absolute;
+        right: 150px;
+        gap: 5px;
+        span{
+                    @include Centering;
+
+        }
+
+    }
+}
+
+        a
+{
+
+font-family: var(--poppines-semi-bold);
+    color: white;
+}
+    }
     
+}
+
+
+nav
+{
+    .bottom
+    {
+        border-bottom: var(--sec-border);
+        color: var(--black-color);
+@include between-center;
+padding: 25px 70px 20px 52px;
+
+      > div
+        {
+            width: 420px;
+
+&:first-child
+{
+    width: 370px;
+    p {
+
+        font-family: var(--Inter-bold);
+        font-size: 20px;
+    }
+}
+
+a
+{
+    text-decoration: none;
+    color: var(--black-color);
+    font-size: var(--text-size);
+    transition: var(--transition);
+    &:hover 
+    {
+        color: var( --black-hover);
+
+    }
+}
+
+&:nth-of-type(2)
+{
+    @include between-center;
+a
+{
+   
+&.active
+{
+    border-bottom: var(--border);
+}
+}
+
+}
+
+
+
+&:nth-of-type(3)
+{
+    @include end-center;
+    gap: 20px;
+
+    .search {
+            position: relative;
+
+   
+input
+{
+border: none;
+padding: 10px 15px;
+    border-radius: 2px;
+    background-color: var(--grey-color);
+    width: 200px;
+    height: 30px;
+    outline: none;
+
+    &::placeholder
+    {
+        font-size: var(--input-txt-size);
+    }
+}    
+span
+{
+    position: absolute;
+    right: 10px;
+    top:50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: var(--black-color);
+    @include Centering;
+
+}
+
+ }
+
+ .links 
+ {
+     @include Centering;
+     gap: 17px;
+    a{
+font-size:18px;
+@include Centering;
+    }
+ }
+}
+
+
+
+
+
+
+
+        }
+    }
+}
+
+
+nav
+{
+    .search
+    {
+position: relative;
+overflow: visible;
+        .blankSearch
+        {
+            position: absolute;
+            width: 100%;
+            height: 150px;
+            background-color: var(--white-color);
+            z-index: 5555;
+            top: 31px;
+            left: 0px;
+            @include Col-start;
+            gap: 15px;
+            padding: 10px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            visibility: hidden;
+            transition: var(--hover-transition);
+            a
+            {
+                color: var(--black-color);
+                width: 100%;
+                padding: 5px;
+                font-size: var(--input-txt-size);
+
+text-transform: capitalize;
+&:hover
+{
+    background-color: var(--grey-color);
+}
+            }
+
+            &.active
+            {
+                visibility: visible;
+            }
+            
+        }
+    }
+}
+
+
+
+@media (max-width:1004px) {
+
+
+
+ nav .bottom > div:first-child
+ {
+    width: 200px;
+ }
+}
+
+
+@media (max-width:948px) {
+
+
+nav .top{
+justify-content: flex-start !important;
+padding: 10px;
+}
+nav .top p:last-child
+{
+    right: 10px;
+}
+}
+@media (max-width:860px) {
+
+
+    .nav-item
+    {
+        display: block !important;
+    }
+    .nav_links
+    {
+        display: none !important;
+    }
+nav .bottom > div:nth-of-type(3)
+{
+    width: 100%;
+    justify-content: space-around;
+
+    .search input 
+    {
+        width:300px;
+    }
+
+}
+    
+ 
+}
+
+
+@media (max-width:698px) {
+nav .bottom 
+{
+    flex-direction: column !important;
+        padding: 25px 23px 20px 19px;
+}
+
+nav .bottom > div:first-child
+{
+    @include Centering;
+    margin-bottom: 10px;
+    
+}
+
+ nav .bottom > div:nth-of-type(3)
+ {
+    width: 100% !important;
+ }
+
+    nav .bottom > div:nth-of-type(3) .search input {
+        width: 400px !important;
+    }
+
+nav .top p
+{
+    font-size: 9px;
+}
+}
+
+
+@media (max-width:574px) {
+nav .bottom > div:nth-of-type(3)
+{
+    justify-content:center !important;
+}
+   nav .bottom > div:nth-of-type(3) .search input {
+        width: 250px !important;
+    }
+    nav .top p
+{
+    font-size: 7px;
+}
+}
+
+
+@media (max-width:442px) {
+nav .bottom > div:nth-of-type(3)
+{
+    flex-direction: column;
+}
+
+nav .top p:last-child
+{
+    top: 26px;
+}
+
 }

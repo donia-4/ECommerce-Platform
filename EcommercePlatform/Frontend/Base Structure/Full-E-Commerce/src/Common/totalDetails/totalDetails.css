@@ -1,0 +1,26 @@
+.TotalDetails p
+{
+font-size: var(--input-txt-size);
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin: 0px;
+padding: 8px 0px;
+color: var(--black-color);
+}
+
+.TotalDetails p span
+{
+    width: 100px;
+text-align: end;
+
+}
+
+
+.TotalDetails p:nth-child(2)
+{
+    border-bottom: 1px solid var(--sec-grey-color);
+    border-top: 1px solid var(--sec-grey-color);
+
+
+}

@@ -1,0 +1,8 @@
+
+h2{
+  font-size: var(--header-size);
+  font-family: var(--poppines-bold);
+  color: var(--red-color);
+  text-align: center;
+  margin-top: 40px;
+}
