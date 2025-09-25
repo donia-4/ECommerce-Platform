@@ -47,6 +47,8 @@ namespace Ecommerce.DataAccess.EntitiesConfigurations
             builder.HasMany(p => p.DiscountLinks)
                    .WithOne(dp => dp.Product)
                    .HasForeignKey(dp => dp.ProductId);
+            builder.Property(p => p.RowVersion)
+       .IsRowVersion();
         }
     }
 }

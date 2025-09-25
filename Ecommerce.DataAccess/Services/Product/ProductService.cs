@@ -277,6 +277,15 @@ namespace Ecommerce.DataAccess.Services.ProductService
                 return (urls, errors);
             }
 
+            // قبل ما تضيف صور جديدة، شيل العلامة من كل الصور القديمة
+            var existingImages = _context.ProductImages.Where(pi => pi.ProductId == productId);
+            foreach (var img in existingImages)
+            {
+                img.IsPrimary = false;
+            }
+
+            bool isFirst = true; // أول صورة جديدة هتكون primary
+
             foreach (var file in files)
             {
                 if (!IsValidImage(file, out string error))
@@ -293,9 +302,10 @@ namespace Ecommerce.DataAccess.Services.ProductService
                         Id = Guid.NewGuid(),
                         ProductId = productId,
                         Url = url,
-                        IsPrimary = urls.Count == 0
+                        IsPrimary = isFirst // أول صورة جديدة بس
                     });
                     urls.Add(url);
+                    isFirst = false;
                 }
                 catch (Exception ex)
                 {
@@ -311,6 +321,7 @@ namespace Ecommerce.DataAccess.Services.ProductService
 
             return (urls, errors);
         }
+
 
         private ReadProductDto MapToReadDto(Product product)
         {

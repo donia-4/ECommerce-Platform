@@ -162,7 +162,7 @@ namespace Ecommerce.DataAccess.Services.Order
                     Id = Guid.NewGuid(),
                     BuyerId = buyerId,
                     CreatedAt = DateTime.UtcNow,
-                    Status = OrderStatus.Pending, // Default status
+                    Status = OrderStatus.Pending,
                     ShippingAddress = request.ShippingAddress,
                     ShipPostalCode = request.ShipPostalCode,
                     Items = new List<OrderItem>()
@@ -186,7 +186,6 @@ namespace Ecommerce.DataAccess.Services.Order
                     decimal unitPrice = product.Price;
                     decimal itemDiscount = 0;
 
-                    // Check for active discounts
                     var activeDiscount = product.DiscountLinks
                         .Where(dl => dl.Discount.IsActive &&
                                     dl.Discount.StartDate <= DateTime.UtcNow &&
@@ -200,7 +199,7 @@ namespace Ecommerce.DataAccess.Services.Order
                         {
                             itemDiscount = unitPrice * (activeDiscount.Discount.Value / 100);
                         }
-                        else // Fixed amount
+                        else
                         {
                             itemDiscount = activeDiscount.Discount.Value;
                         }
@@ -223,21 +222,32 @@ namespace Ecommerce.DataAccess.Services.Order
 
                     // Reduce stock
                     product.Stock -= cartItem.Quantity;
+
+                    // EF Core هيعرف يتعامل مع RowVersion هنا
                     _context.Products.Update(product);
                 }
 
                 order.Subtotal = subtotal;
-                order.Total = subtotal; // For now, no tax or shipping
+                order.Total = subtotal;
 
                 _context.Orders.Add(order);
 
-                // Clear the cart
-                _context.CartItems.RemoveRange(cart.CartItems);
+                // Clear cart
+                //_context.CartItems.RemoveRange(cart.CartItems);
                 cart.UpdatedAt = DateTime.UtcNow;
                 _context.Carts.Update(cart);
 
-                await _context.SaveChangesAsync();
-                await transaction.CommitAsync();
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    await transaction.CommitAsync();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    await transaction.RollbackAsync();
+                    _logger.LogWarning(ex, "Concurrency conflict while creating order for BuyerId: {BuyerId}", buyerId);
+                    return _responseHandler.BadRequest<OrderResponse>("Another buyer just purchased some of these items. Please refresh your cart and try again.");
+                }
 
                 var response = await BuildOrderResponse(order.Id);
                 _logger.LogInformation("Order created successfully from cart. OrderId: {OrderId}", order.Id);
@@ -250,6 +260,7 @@ namespace Ecommerce.DataAccess.Services.Order
                 return _responseHandler.InternalServerError<OrderResponse>("An error occurred while creating order.");
             }
         }
+
 
         public async Task<Response<PaginatedList<OrderSummaryResponse>>> GetOrdersForAdminAsync(OrderQueryDto query)
         {

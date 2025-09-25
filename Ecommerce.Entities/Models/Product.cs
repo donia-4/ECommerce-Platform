@@ -34,6 +34,8 @@ namespace Ecommerce.Entities.Models
         // Relations
         public List<ProductImage> Images { get; set; } = new List<ProductImage>();
         public List<DiscountProduct> DiscountLinks { get; set; } = new List<DiscountProduct>();
+        public byte[] RowVersion { get; set; } // للـ concurrency
+
     }
 
 }

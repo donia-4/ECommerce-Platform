@@ -242,7 +242,7 @@ namespace Ecommerce.DataAccess.Services.Cart
                 CartItemId = ci.Id,
                 ProductId = ci.ProductId,
                 ProductName = ci.Product.Name,
-                ImageUrl = ci.Product.Images.Where(i => i.IsPrimary).Select(p => p.Url)?.SingleOrDefault() ?? string.Empty,
+                ImageUrl = ci.Product.Images.Where(i => i.IsPrimary).Select(p => p.Url)?.FirstOrDefault() ?? string.Empty,
                 Quantity = ci.Quantity,
                 UnitPrice = ci.Product.Price,
                 Subtotal = ci.Quantity * ci.Product.Price
